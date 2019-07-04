@@ -3,11 +3,12 @@
         "start": "node app.js",
         "dev": "nodemon app.js"
     },
-    "name": "BMBY2",
+    "name": "bmby2",
     "version": "1.0.0",
     "main": "app.js",
     "license": "MIT",
     "dependencies": {
+        "@hapi/joi": "^15.1.0",
         "body-parser": "^1.19.0",
         "config": "^3.1.0",
         "cors": "^2.8.5",

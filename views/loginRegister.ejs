@@ -1,0 +1,51 @@
+<%-include("partials/header") -%>
+
+
+    <h1 class="login-page-header">Login/Register</h1> 
+
+<div class=login-register>
+
+
+    <div class="box">
+        <h1>Login</h1>
+
+        <h2>Already registered? Sign in here.</h2>
+
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+
+        <button type="button" class="btn btn-primary btn-lg btn-block">Login</button>
+        
+        
+    </div>
+
+    <div class="box">
+
+        <h1>Register</h1>
+
+        <h2>Not registered? Register here.</h2>
+
+        <form action="/register" method="post">
+            
+
+        <input type="text" name="firstname" placeholder="Firs Name">
+        <input type="text" name="lastname" placeholder="Last Name">
+        <input type="text" name="city" placeholder="City">
+        <input type="text" name="mobile" placeholder="Mobile (+972)1234567">
+        <input type="email" name="email" placeholder="Email">
+        <input type="date" name="birthday" min="1960-12-31" max="2000-12-31">
+        <input type="password" name="password" placeholder="Password">
+        <input type="password" name="passwordVerify" placeholder="Verify Password"> 
+        
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+        </form>
+        
+    </div>
+    
+</div>
+
+
+
+
+<%-include("partials/footer") -%>
+

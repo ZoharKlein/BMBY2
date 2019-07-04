@@ -1,106 +1,152 @@
-body {
-    margin: 0;
-    padding: 0;
-    background: #f6f5f5;
-}
-
-
-/********************************** Header *********************************************/
-
-.header-nav ul {
-    list-style-type: none;
-    overflow: hidden;
-    background-color: #313848;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    padding-left: 10px;
-}
-
-.header-nav li {
-    position: relative;
-    float: left;
-}
-
-.header-nav li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    background-color: #313848;
-}
-
-.header-nav li a:hover {
-    color: wheat;
-    border: 0.1px solid currentColor;
-}
-
-.header-nav button {
-    float: right;
-    position: relative;
-    right: 30px;
-}
-
-
-/********************************** CRM *********************************************/
-
-.app {}
-
-.side-bar {
-    border: 2px solid currentColor;
-    width: 300px;
-    height: 1100px;
-    background: #313848;
-    position: relative;
-    bottom: 16px;
-}
-
-.crm {
-    position: relative;
-    left: 330px;
-    width: 1500px;
-}
-
-.crm .box {
-    height: 500px;
-    width: 400px;
-    border: 2px solid currentColor;
-    margin: 10px;
-}
-
-.crm .boxes {
-    display: flex;
-    flex-direction: row;
-}
-
-.crm .box1 {
-    order: 1
-}
-
-.crm .box2 {
-    order: 2
-}
-
-.crm .box3 {
-    order: 3
-}
-
-
-/********************************** Footer *********************************************/
-
-footer {
-    background-color: #444444;
-    text-align: center;
-    padding: 50px;
-}
-
-.social-network {
-    background-color: #444444;
-}
-
-footer img {
-    background-color: #444444;
-    margin: 10px;
-    height: 50px;
-    width: 50px;
-}
+    body {
+        margin: 0;
+        padding: 0;
+        background: #f6f5f5;
+    }
+    /********************************** Header *********************************************/
+    
+    .header-nav ul {
+        list-style-type: none;
+        overflow: hidden;
+        background-color: #313848;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        padding-left: 10px;
+    }
+    
+    .header-nav li {
+        position: relative;
+        float: left;
+    }
+    
+    .header-nav li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        background-color: #313848;
+    }
+    
+    .header-nav li a:hover {
+        color: wheat;
+        border: 0.1px solid currentColor;
+    }
+    
+    .header-nav button {
+        float: right;
+        position: relative;
+        right: 30px;
+    }
+    /********************************** Login/Register *********************************************/
+    
+    .login-page-header {
+        font-size: 3rem;
+        text-align: center;
+        padding: 60px;
+    }
+    
+    .login-register {
+        display: flex;
+        flex-direction: row;
+        margin: 0 auto;
+        width: 60%;
+        padding: 100px;
+        padding-top: 0;
+    }
+    
+    .login-register .box {
+        text-align: center;
+        height: 800px;
+        width: 600px;
+        margin: 30px;
+        background-color: #f9f3ec;
+        padding: 30px;
+        border-radius: 5%;
+        box-shadow: -9px -10px 9px -1px rgba(0, 0, 0, 0.57)
+    }
+    
+    .login-register .box h1 {
+        font-size: 2.1rem;
+        margin-bottom: 30px;
+    }
+    
+    .login-register .box h2 {
+        font-size: 1.5rem;
+        margin-bottom: 90px
+    }
+    
+    .login-register .box input {
+        height: 50px;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        border-radius: 10%;
+    }
+    
+    .login-register .box button {
+        position: relative;
+        margin: 20px 0;
+    }
+    /********************************** CRM *********************************************/
+    
+    .app {}
+    
+    .side-bar {
+        border: 2px solid currentColor;
+        width: 300px;
+        height: 1100px;
+        background: #313848;
+        position: relative;
+        bottom: 16px;
+    }
+    
+    .crm {
+        position: relative;
+        left: 330px;
+        width: 1500px;
+    }
+    
+    .crm .box {
+        height: 500px;
+        width: 400px;
+        border: 2px solid currentColor;
+        margin: 10px;
+    }
+    
+    .crm .boxes {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .crm .box1 {
+        order: 1
+    }
+    
+    .crm .box2 {
+        order: 2
+    }
+    
+    .crm .box3 {
+        order: 3
+    }
+    /********************************** Footer *********************************************/
+    
+    footer {
+        background-color: #444444;
+        text-align: center;
+        padding: 50px;
+        width: 100%;
+    }
+    
+    .social-network {
+        background-color: #444444;
+    }
+    
+    footer img {
+        background-color: #444444;
+        margin: 10px;
+        height: 50px;
+        width: 50px;
+    }

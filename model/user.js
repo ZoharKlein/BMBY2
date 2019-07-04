@@ -1,4 +1,4 @@
-class User {
+module.exports.User = class User {
 
     constructor(firstName, lastName, password, email, phoneNumber, ) {
 
@@ -10,11 +10,16 @@ class User {
 
 
     }
+}
+exports.userRole = {
+    SUPER_ADMINISTRATOR: "super administrator",
+    ADMINISTRATOR: "administrator",
+    WORKER: "worker"
+}
 
-    userRole = {
-        ADMINISTRATOR = "administrator",
-        WORKER = "worker"
-    }
 
-
+exports.userStats = {
+    WAIT_FOR_HACK: "wait for admin hack",
+    APPROVED: "approved",
+    SUSPENDED: "suspended",
 }
