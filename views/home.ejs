@@ -7,9 +7,10 @@
         <li><a href="contact.asp">Contact</a></li>
         <li><a href="about.asp">About</a></li>
 
-<form action="/loginRegister" method="POST">
+<form action="/<%=action%>" method="POST">
     
-        <button type="submit" class="btn btn-success">Login / Register</button>
+        <!--<button type="submit" class="btn btn-success">Login / Register</button>-->
+        <button type="submit" class="btn btn-success"><%=loginOrOut%>%></button>
 </form>
 
     </ul>
@@ -18,39 +19,58 @@
 
 
 <div class="app">
-
+           
+    <!--Side Bar Strat-->
     <div class="side-bar">
 
-
-        <a href="">dasdsa</a>
-        
-
-
-
-            <div class="crm">
-
-
-    <div class="boxes">
-        
     
-        <div class="box box1">
 
-        </div>
-        
-        <div class="box box2">
+        <% if (typeof(menuBar) !== 'undefined') { %> 
+            <% for (i=0; i < menuBar.length; i++) { %>
 
-        </div>
+                <div class="accordion" id="accordionExample">
+                    <div class="card">
+                        <div class="card-header" id="headingOne-<%(i+1)%>">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse-<%(i+1)%>" aria-expanded="true" aria-controls="collapse-<%(i+1)%>">
+                                    <%=menuBar[i][0]%>
+                                </button>
+                            </h2>
+                        </div>
+                        <% for (j=1; j < menuBar[i].length; j++) { %>
 
-        <div class="box box3">
+                            <div id="collapse-<%(i+1)%>" class="collapse" aria-labelledby="heading-<%(i+1)%>" data-parent="#accordionExample">
+                                <div class="card-body">
+                                <form action='/dashboard/<%=menuBar[i][0]%>/<%=menuBar[i][j]%>' method='post'>
+                                    <button class="nav-btn" type="submit"> <%=menuBar[i][j]%></button>
+                                </form>
+                                
+                                
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
 
-        </div>
+            <% } %>
+        <% } %>
+
     </div>
-    </div>
+
+    <!--Side Bar End-->
+
+
+
+   <!--CRM Start-->
+    <div class="crm">
     
     </div>
+    <!--CRM End-->
+    
 
 
 </div>
+
 
 
 

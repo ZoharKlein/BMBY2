@@ -1,6 +1,6 @@
 const Joi = require('@hapi/joi');
 
-
+//change the script name
 
 const joiValDef = {
     bigLetterFirst_aToz_2To20: Joi.string().regex(/^[A-Z]+[a-z]{2,20}$/),

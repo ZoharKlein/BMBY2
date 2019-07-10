@@ -11,10 +11,18 @@
 
         <h2>Already registered? Sign in here.</h2>
 
+        <form action="/login" method="post">
+
         <input type="text" name="username" placeholder="Username">
         <input type="password" name="password" placeholder="Password">
 
-        <button type="button" class="btn btn-primary btn-lg btn-block">Login</button>
+
+        <% if (typeof error !== "undefined") {%>
+        <h2><%=error%></h2>
+        <% } %>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+        </form>
         
         
     </div>

@@ -2,9 +2,27 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const Joi = require('@hapi/joi');
-const registrationCheaker = require('./registration/registrationValuation.js')
-const User = require('./model/user.js')
+const registrationCheaker = require('./validationConfig/joiValidationConfig')
+
+
+
+
+const login = require('./routers/login')
+const logout = require('./routers/logout')
+const register = require('./routers/register')
+
+
+
+///mysql
+///test
+
+
+
+// mysqlDB.execute("SELECT * FROM users", function(err, rows, fields) {
+//     if (err) {
+//         console.log("1)" + err)
+//     }
+// })
 
 
 
@@ -20,7 +38,7 @@ app.set("view engine", "ejs")
 ///////////////////// Home Page /////////////////////
 app.route('/')
     .get((req, res) => {
-        res.render("home")
+        res.render('home', { loginOrOut: 'Login / Register', action: 'loginRegister' })
 
     })
 
@@ -31,6 +49,7 @@ app.route('/loginRegister')
 
 
 ///////////////////// Register /////////////////////
+/*
 app.route('/register')
     .post((req, res) => {
         const date = new Date()
@@ -72,6 +91,14 @@ app.route('/register')
             });
         }
     })
+*/
+
+///////////////////// Login /////////////////////
+
+app.use('/', login)
+app.use('/', logout)
+app.use('/', register)
+register
 
 ///////////////////// API TO SEND LEAD /////////////////////
 app.route('/api/lead/:cid')
