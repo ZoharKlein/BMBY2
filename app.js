@@ -11,6 +11,8 @@ const login = require('./routers/login')
 const logout = require('./routers/logout')
 const register = require('./routers/register')
 
+const customersLogin = require('./routers/coustomers/login')
+
 
 
 ///mysql
@@ -48,57 +50,64 @@ app.route('/loginRegister')
     })
 
 
-///////////////////// Register /////////////////////
-/*
-app.route('/register')
-    .post((req, res) => {
-        const date = new Date()
-
-        if (req.body.password === req.body.passwordVerify) {
-            registrationCheaker.Joi.validate({
-
-                firstname: req.body.firstname,
-                lastname: req.body.lastname,
-                email: req.body.email,
-                mobile: req.body.mobile,
-                city: req.body.city,
-                password: req.body.password
-
-            }, registrationCheaker.userSchema, (err, value) => {
-
-                if (err) {
-                    console.log("error" + err)
-                } else {
-
-                    /// add user to database with status - "wait for admin hack"/ after that render dashboard of the userx
-
-
-                    const newUser = {
-                        firstname: req.body.firstname,
-                        lastname: req.body.lastname,
-                        email: req.body.email,
-                        mobile: req.body.mobile,
-                        city: req.body.city,
-                        password: req.body.password,
-                        status: User.userStats.WAIT_FOR_HACK,
-                        regDate: new Date(),
-                        birthDay: req.body.birthday
-                    }
-
-                    console.log(newUser)
-                }
-
-            });
-        }
-    })
-*/
-
 ///////////////////// Login /////////////////////
 
 app.use('/', login)
 app.use('/', logout)
 app.use('/', register)
-register
+
+///////////////////// Customers /////////////////////
+app.use('/customers/', customersLogin)
+
+app.get("/customers", (req, res) => {
+    res.render('customers')
+})
+const passport = require('passport')
+require('./passports/passport')(passport);
+
+
+
+
+
+
+/**
+ * 
+ * need to do the facebook and goole login on rouutes
+ * need to think what next page will be
+ * 
+ */
+//facebook
+app.get('/customers/auth/facebook', passport.authenticate('facebook') );
+
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { successRedirect: '/customers',
+                                      failureRedirect: '/customers' }
+));
+
+
+//google
+app.get('/customers/auth/google',
+  passport.authenticate('google', { scope: ['profile'] }));
+
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { 
+      failureRedirect: '/login' 
+    
+    }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+
+
+
+
+
+
+
+
 
 ///////////////////// API TO SEND LEAD /////////////////////
 app.route('/api/lead/:cid')
@@ -130,4 +139,17 @@ app.route('/api/lead/:cid')
 
     })
 
+
+    
+
+
 app.listen(PORT, () => console.log(PORT + " running"))
+
+///*facebook
+/*
+app.get('/customers/auth/facebook', passport.authenticate('facebook') );
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { successRedirect: '/customers',
+                                      failureRedirect: '/login' }));
+*/
