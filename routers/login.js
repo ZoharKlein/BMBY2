@@ -21,7 +21,15 @@ router.post('/login', (req, res, next) => {
             if (!result) {
                 res.render("loginRegister", { error: message.message })
             } else {
-                res.render('home', { loginOrOut: 'Logout', action: 'logout', menuBar: menu.superAdmin })
+
+                const loginUser = {
+                    userData: result,
+                    userMenu: menu.selectMenuByRole(result.role) 
+                }
+                
+                console.log(loginUser)
+
+                res.render('home', { user: loginUser})
             }
         }
 
@@ -29,12 +37,6 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 
 })
-
-
-
-
-
-
 
 router.post('/logout', (req, res) => {
     req.logout();

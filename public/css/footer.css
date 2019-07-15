@@ -1,0 +1,22 @@
+
+
+footer {
+    background-image: url(/img/footer-wave.svg);
+    background-size: cover;
+    background-position: center;
+}
+
+.copyright {
+    margin-bottom: 0;
+    color: #1c4721;
+}
+
+
+
+
+@media only screen and (max-width: 600px) {
+    .footer {
+        padding: 2rem !important;
+        font-size: 90%;
+    }
+}

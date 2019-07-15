@@ -139,9 +139,10 @@ const googlestrat = (passport) => {
 passport.use('google', new GoogleStrategy({
     clientID: '674767443046-4ckuvpvv212ra8b13nkit4lo2shat2ga.apps.googleusercontent.com',
     clientSecret: 'QfHMkIBrcGclvaIcMbu6WMxt',
-    callbackURL: "http://localhost:3000/customers/auth/google/"
+    callbackURL: "http://localhost:3000/customers/auth/google/",
+    userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
-  function(accessToken, refreshToken, profile, done) {
+  (accessToken, refreshToken, profile, cb) => {
 
     console.log(profile.id)
 
@@ -149,6 +150,7 @@ passport.use('google', new GoogleStrategy({
 
         if(err) {
             console.log('errror' + err)
+            return cb(err,false,'find');
         }else {
             console.log(profile)
 
@@ -160,33 +162,26 @@ passport.use('google', new GoogleStrategy({
                 googleID: profile.id,
             })
             newCustomer.save()
-            done(null, newCustomer);
+             return cb(null, newCustomer);
         
             }
             else {
                 console.log('in the system')
-                console.log(result)
-                return done(err,false,'find');
+                //console.log(result)
+                cb(result,cb);
             }
             
         }})
-  }
+  },passport.serializeUser(function(user, done) {
+    done(null, user);
+  }),
+  
+  passport.deserializeUser(function(user, done) {
+    done(null, user);
+  })
+
+  
 )
 )
     
 }
-/*
-app.get('/customers/auth/google',
-  passport.authenticate('google', { scope: ['profile'] }));
-
-app.get('/auth/google/callback', 
-  passport.authenticate('google', { 
-      failureRedirect: '/login' 
-    
-    }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
-
-*/

@@ -12,6 +12,7 @@ const logout = require('./routers/logout')
 const register = require('./routers/register')
 
 const customersLogin = require('./routers/coustomers/login')
+const leadAPI = require('./routers/LeadApi/leadAPI')
 
 
 
@@ -35,7 +36,25 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(express.static("public"))
 
+
 app.set("view engine", "ejs")
+
+
+
+
+
+///////////////////// new Home Page /////////////////////
+
+app.route('/')
+    .get((req, res) => {
+        res.render('index', { loginOrOut: 'Login / Register', action: 'loginRegister' })
+
+    })
+
+app.route('/register')
+    .get((req, res) => {
+        res.render("register")
+    })
 
 ///////////////////// Home Page /////////////////////
 app.route('/')
@@ -90,14 +109,11 @@ app.get('/auth/facebook/callback',
 app.get('/customers/auth/google',
   passport.authenticate('google', { scope: ['profile'] }));
 
-app.get('/auth/google/callback', 
-  passport.authenticate('google', { 
-      failureRedirect: '/login' 
-    
-    }),
+  
+  app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/customers' }),
   function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('/customers');
   });
 
 
@@ -110,6 +126,9 @@ app.get('/auth/google/callback',
 
 
 ///////////////////// API TO SEND LEAD /////////////////////
+
+app.use('/',leadAPI)
+/*
 app.route('/api/lead/:cid')
     .post((req, res) => {
         console.log(req.params.cid)
@@ -130,7 +149,7 @@ app.route('/api/lead/:cid')
                 console.log("error" + err)
             } else {
 
-                /// add user to database with status - "wait for admin hack"/ after that render dashboard of the userx
+               
                 console.log(value)
             }
 
@@ -138,7 +157,7 @@ app.route('/api/lead/:cid')
         })
 
     })
-
+*/
 
     
 

@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
-const passportLocalMongoose = require('passport-local-mongoose')
+
 
 
 mongoose.connect('mongodb://localhost:27017/bamy2DB', { useNewUrlParser: true })
 mongoose.set("useCreateIndex", true)
 
 const customerSchema = new mongoose.Schema({
-    username:String,
+    username:String, 
     cid: Number,
     email: String,
     password: String,
@@ -16,21 +16,36 @@ const customerSchema = new mongoose.Schema({
 
 })
 
-customerSchema.plugin(passportLocalMongoose)
 
 exports.Customer = new mongoose.model('Coustomer', customerSchema)
 
 const leadSchema = new mongoose.Schema({
-    firstname: String,
-    lastname: String,
-    email:String,
-    city: String,
-    title:String,
-    msg: String,
+    firstname: { type : String , sparse : true, required : true },
+    lastname: { type : String , sparse : true, required : true},
+    email:{ type : String , sparse : true, required : true},
+    city: { type : String , sparse : true, required : true},
+    title:{ type : String , sparse : true, required : true},
+    msg: { type : String , sparse : true, required : true},
+    cid: { type : Number , sparse : true, required : true},
+    date: {type : Date , sparse : true, required : true},
 
 
 })
 
-leadSchema.plugin(passportLocalMongoose)
 
 exports.Lead = new mongoose.model('Lead', leadSchema)
+
+mongoose.Collection.dropIndexes
+
+
+const leadProcessSchema = new mongoose.Schema({
+    lead_id: { type : String , sparse : true, required : true },
+    user_id: {type : Number , sparse : true, required : true},
+    now_status: {type : String , sparse : true, required : true},
+    last_date_modified: {type : Date , sparse : true, required : true},
+
+})
+
+
+exports.LeadProcess = new mongoose.model('LeadProcess', leadProcessSchema)
+

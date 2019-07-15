@@ -13,6 +13,8 @@ require('../passports/passport')(passport);
 router.post('/register', (req, res, next) => {
 
     const date = new Date()
+    registerValid = false
+
 
     if (req.body.password === req.body.passwordVerify) {
         registrationCheaker.Joi.validate({
@@ -31,6 +33,7 @@ router.post('/register', (req, res, next) => {
             } else {
 
 
+        
                 mySQLDB.GetDataFromMySQL("SELECT * FROM users WHERE email = '" + req.body.email + "'")
                     .then(data => {
                         console.log(data)
@@ -60,7 +63,7 @@ router.post('/register', (req, res, next) => {
                                     (SELECT count(*) as count
                                     FROM users WHERE username LIKE '${req.body.firstname}${req.body.lastname}%')`)
                                         .then(data => {
-                                            let username = `${req.body.firstname}${req.body.lastname}`
+                                            username = `${req.body.firstname}${req.body.lastname}`
 
 
                                             const sameUsername = data[1].id
@@ -110,7 +113,12 @@ router.post('/register', (req, res, next) => {
                                           );
                                     `
 
-                                            mySQLDB.InsertDataFromMySQL(insertIntoSql).then(result => { console.log(result) }).catch(err => { console.log(err) })
+                                            mySQLDB.InsertDataFromMySQL(insertIntoSql).then(result => { 
+                                                console.log(result) 
+                                                registerValid = true
+                                                console.log(registerValid)
+                                                
+                                            }).catch(err => { console.log(err) })
 
 
 
@@ -121,11 +129,21 @@ router.post('/register', (req, res, next) => {
                     })
                     .catch(err => { console.log(err) })
 
+                    setTimeout(() => {
+
+                    console.log(registerValid)
 
 
-
-
-
+                    if (registerValid) {
+                        ///need to change
+                        console.log("ok")
+                        res.render('login',{loginUsername:username,password:req.body.password})
+                    }
+                    else {
+                        res.render('register')
+                    }
+                    
+                    }, 1500);
 
 
 
