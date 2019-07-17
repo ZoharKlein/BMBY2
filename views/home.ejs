@@ -113,32 +113,8 @@
 
 
         <% if (typeof leads !== 'undefined') {%>
-        
-        <h1>Leads</h1>
-        
-        <table>
-        
-          <tr>
-          <td> First Name</td>
-          <td> Last Name</td>
-          <td> Email</td>
-          <td> Title</td>
-          <td> Status</td>
-          </tr>
 
-          <% for (i = 0; i < leads.length; i++) {%> 
-            <tr>
-            <td> <%= leads[i].lead.firstname%> </td>
-            <td> <%= leads[i].lead.lastname %></td>
-            <td> <%= leads[i].lead.email %></td>
-            <td> <%= leads[i].lead.title %></td>
-            <td> <%= leads[i].leadProcess[0].now_status %></td>
-            <td> <button type="">Expand</button></td>
-            </tr>
-          <%} %>
-        
-        </table>
-        
+        <%-include("partials/leads") -%>
         
         <%} %>
 

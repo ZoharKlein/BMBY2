@@ -78,6 +78,15 @@ require('./passports/passport')(passport);
 
 
 
+/////temp for customer
+app.get('/costumerReg', (req,res) => {
+    res.render('costumer-reg')
+})
+
+
+
+
+
 
 
 /**

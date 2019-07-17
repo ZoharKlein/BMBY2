@@ -57,6 +57,7 @@
       cursor: pointer;
     }
 
+
     /**********siderbar current user styling ********/
 
     .cur-user {
@@ -140,6 +141,37 @@
     #wrapper.toggled #sidebar-wrapper {
       margin-left: 0;
     }
+
+
+    /*******************leads styling**************/
+
+    .leads {
+      margin: 3rem 2rem;
+    }
+
+    .leads-title {
+      color: #1c4721;
+      font-weight: 700; 
+    }
+
+    .leads-table {
+      width: 100%;
+      margin-top: 2rem;
+    }
+
+    .lead-table-title {
+      background-color: #eeb310;
+      color: red;
+    }
+
+    .leads-table tr td {
+      padding: 1rem 0;
+    }
+
+
+
+
+
 
     @media (min-width: 768px) {
 
