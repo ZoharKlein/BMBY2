@@ -114,7 +114,27 @@
 
         <% if (typeof leads !== 'undefined') {%>
 
-        <%-include("partials/leads") -%>
+          <%-include("partials/leads") -%>
+        
+        <%} %>
+
+        <% if (typeof settingss !==  'undefined') {%>
+
+          <h1>Settings</h1>
+
+          <button type="">Change picture</button>
+          <button type="">Edit profile</button>
+        
+        <%} %>
+
+
+
+        <% if (typeof dashboard !== 'undefined') {%>
+
+          <h1>Dashboard</h1>
+
+          <button type="">Change picture</button>
+          <button type="">Edit profile</button>
         
         <%} %>
 

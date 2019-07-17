@@ -11,7 +11,7 @@ router.post('/:nav/', (req,res)=>{
 
     switch (nav) {
         case MenuItems.dashboard :{
-            res.send(req.params.nav+req.params.role+req.params.id)
+            res.render('home',{user:global.loginUser , dashboard: true})
             break;
         }
         case MenuItems.leads :{
@@ -92,7 +92,7 @@ router.post('/:nav/', (req,res)=>{
             break;
         }
         case MenuItems.settings :{
-            res.send(req.params.nav+req.params.role+req.params.id)
+            res.render('home',{user:global.loginUser , settingss: true})
             break;
         }
         ///neet to thinck were its belong
