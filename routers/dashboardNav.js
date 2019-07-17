@@ -16,11 +16,61 @@ router.post('/:nav/', (req,res)=>{
         }
         case MenuItems.leads :{
             
-            let leadArray
+            const leadArray = []
 
-            mongooseDB.LeadProcess.find({user_id: loginUser.userData.userID})
-            .populate('lead_id').exec(function(err, projects){
-                leadArray = projects
+            mongooseDB.LeadProcess.find({user_id: global.loginUser.userData.userID})
+            .populate('lead_id')
+            .exec(function(err, projects){
+
+                projects.forEach(element => {
+                
+
+                    const leadProcess = {
+                        user_id: element.user_id,
+                        now_status: element.now_status,
+                        last_date_modified: element.last_date_modified
+                    }
+
+                    if(leadArray.length === 0) {
+                        const leadProcessArr = []
+                        leadProcessArr.push(leadProcess)
+
+                        leadArray.push({lead: element.lead_id,leadProcess: leadProcessArr})
+
+                    }
+                    else {
+
+                        let addToArray = false
+                        for (i = 0; i < leadArray.length ; i++) {
+
+                            if (leadArray[i].lead === element.lead_id) {
+
+                                leadArray[i].leadProcess.push(leadProcess)
+                                addToArray = true
+                                break;
+                            }
+
+                        }
+                        if (!addToArray) {
+                            const leadProcessArr = []
+                        
+                            leadProcessArr.push(leadProcess)
+                        
+                            leadArray.push({lead: element.lead_id,leadProcess: leadProcessArr})
+                        }
+                        
+                    }
+                });
+
+                
+                leadArray.forEach(element => {
+
+                    element.leadProcess.sort( (a,b) => {
+                        console.log(a,b)
+                        return new Date(b.last_date_modified) - new Date(a.last_date_modified)
+                    })                    
+                });
+
 
             })
             
@@ -28,12 +78,6 @@ router.post('/:nav/', (req,res)=>{
                 console.log(leadArray)
                 res.render('home',{user:global.loginUser , leads: leadArray})
             }, 1000);
-
-
-            /*
-            .then(result=>console.log(result))
-            .catch(err=>{console.log(err)})
-            */
 
 
 
