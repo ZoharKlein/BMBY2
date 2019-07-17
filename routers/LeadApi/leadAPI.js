@@ -9,7 +9,7 @@ var extractDuplicateField = require('mongoose-extract-duplicate-field');
 
 
 
-router.post('/api/lead/:cid',(req, res,) => {
+router.post('/:cid',(req, res,) => {
         console.log(req.params.cid)
         registrationCheaker.Joi.validate({
 

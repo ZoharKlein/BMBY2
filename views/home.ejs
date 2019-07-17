@@ -34,19 +34,19 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
 
-    <img src="img/toggle.svg" class="nav-toggle" id="menu-toggle">
+    <img src="http://razked.com/CRM/toggle.svg" class="nav-toggle" id="menu-toggle">
 
     <ul class="navbar-nav mr-auto" id="mobile-nav">
 
       <li class="nav-item">
         <a class="nav-link link-icon" href="#">
-          <img src="img/notification.svg" alt="notification icon">
+          <img src="http://razked.com/CRM/notification.svg" alt="notification icon">
         </a>
 
       </li>
       <li class="nav-item">
         <a class="nav-link link-icon" href="#">
-          <img src="img/search.svg" alt="search icon">
+          <img src="http://razked.com/CRM/search.svg" alt="search icon">
         </a>
 
       </li>
@@ -80,13 +80,18 @@
       <div class="list-group list-group-flush">
 
         <div class="cur-user">
-          <img src="img/user-pic.jpg" class="cur-user__pic" alt="user pic" id="cur-user-pic">
+          <img src="<%=user.userData.profileImg%>" class="cur-user__pic" alt="user pic" id="cur-user-pic">
           <h5 class="cur-user__name" id="cur-user-name"><%=user.userData.username%></h5>
           <p class="cur-user__role" id="cur-user-role"><%=user.userData.role%></p>
         </div>
 
         <% for(i = 0; i < user.userMenu.length; i++) { %> 
-          <a href="#" class="list-group-item list-group-item-action bg-light"><%=user.userMenu[i]%></a>
+
+         <form action="/dashboard/<%=user.userMenu[i]%>" method='post'>
+          
+            
+            <button type="submit" class="list-group-item list-group-item-action bg-light"><%=user.userMenu[i]%></button>
+          </form>
                 <% } %>
 
 <!--
@@ -105,12 +110,38 @@
     <div id="page-content-wrapper">
 
       <div class="container-fluid">
-        <h1 class="mt-4">Simple Sidebar</h1>
-        <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on
-          larger screens. When toggled using the button below, the menu will change.</p>
-        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is optional,
-          and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which will toggle the
-          menu when clicked.</p>
+
+
+        <% if (typeof leads !== 'undefined') {%>
+        
+        <h1>Leads</h1>
+        
+        <table>
+        
+          <tr>
+          <td> First Name</td>
+          <td> Last Name</td>
+          <td> Email</td>
+          <td> Title</td>
+          <td> Status</td>
+          </tr>
+
+          <% for (i = 0; i < leads.length; i++) {%> 
+            <tr>
+            <td> <%= leads[i].lead_id.firstname%> </td>
+            <td> <%= leads[i].lead_id.lastname %></td>
+            <td> <%= leads[i].lead_id.email %></td>
+            <td> <%= leads[i].lead_id.title %></td>
+            <td> <%= leads[i].now_status %></td>
+            <td> <button type="">Expand</button></td>
+            </tr>
+          <%} %>
+        
+        </table>
+        
+        
+        <%} %>
+
       </div>
 
     </div>
@@ -118,6 +149,15 @@
 
   </div>
   <!-- /#wrapper -->
+
+
+
+
+  <!--Zohar ejs-->
+
+
+
+  <!--Zohar ejs end-->
 
   <!--bootstrap js-->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -141,38 +181,4 @@
 </body>
 
 </html>
-
-<!--     
-
-        <% if (typeof(menuBar) !== 'undefined') { %> 
-            <% for (i=0; i < menuBar.length; i++) { %>
-
-                <div class="accordion" id="accordionExample">
-                    <div class="card">
-                        <div class="card-header" id="headingOne-<%(i+1)%>">
-                            <h2 class="mb-0">
-                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse-<%(i+1)%>" aria-expanded="true" aria-controls="collapse-<%(i+1)%>">
-                                    <%=menuBar[i][0]%>
-                                </button>
-                            </h2>
-                        </div>
-                        <% for (j=1; j < menuBar[i].length; j++) { %>
-
-                            <div id="collapse-<%(i+1)%>" class="collapse" aria-labelledby="heading-<%(i+1)%>" data-parent="#accordionExample">
-                                <div class="card-body">
-                                <form action='/dashboard/<%=menuBar[i][0]%>/<%=menuBar[i][j]%>' method='post'>
-                                    <button class="nav-btn" type="submit"> <%=menuBar[i][j]%></button>
-                                </form>
-                                
-                                
-                                </div>
-                            </div>
-                        <% } %>
-                    </div>
-                </div>
-
-            <% } %>
-        <% } %>
-
-    </div> -->
 

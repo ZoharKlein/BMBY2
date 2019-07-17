@@ -28,7 +28,7 @@ router.post('/login', (req, res, next) => {
                 }
                 
                 console.log(loginUser)
-
+                global.loginUser = loginUser
                 res.render('home', { user: loginUser})
             }
         }

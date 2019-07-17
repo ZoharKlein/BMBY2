@@ -5,7 +5,7 @@ const cors = require('cors')
 const registrationCheaker = require('./validationConfig/joiValidationConfig')
 
 
-
+///Routers
 
 const login = require('./routers/login')
 const logout = require('./routers/logout')
@@ -14,18 +14,9 @@ const register = require('./routers/register')
 const customersLogin = require('./routers/coustomers/login')
 const leadAPI = require('./routers/LeadApi/leadAPI')
 
+const dashboardNav = require('./routers/dashboardNav')
 
 
-///mysql
-///test
-
-
-
-// mysqlDB.execute("SELECT * FROM users", function(err, rows, fields) {
-//     if (err) {
-//         console.log("1)" + err)
-//     }
-// })
 
 
 
@@ -121,45 +112,20 @@ app.get('/customers/auth/google',
 
 
 
-
-
-
-
 ///////////////////// API TO SEND LEAD /////////////////////
-
-app.use('/',leadAPI)
-/*
-app.route('/api/lead/:cid')
-    .post((req, res) => {
-        console.log(req.params.cid)
-        registrationCheaker.Joi.validate({
-
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            email: req.body.email,
-            mobile: req.body.mobile,
-            city: req.body.city,
-            cid: req.params.cid,
-            msg: req.body.msg,
-            title: req.body.title
-
-        }, registrationCheaker.leadSchema, (err, value) => {
-
-            if (err) {
-                console.log("error" + err)
-            } else {
-
-               
-                console.log(value)
-            }
-
-
-        })
-
-    })
-*/
+app.use('/api/lead',leadAPI)
 
     
+///////////////////// dashboard /////////////////////
+
+
+app.use('/dashboard',dashboardNav)
+/*
+app.post('/dashboard/Leads', (req,res)=>{
+    console.log('OK')
+    res.send('OK')
+})*/
+
 
 
 app.listen(PORT, () => console.log(PORT + " running"))

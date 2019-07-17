@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/costumer-reg.css">
+
+    <title>Register to Bmby CRM</title>
+
+</head>
+
+<body>
+
+        <div class="container main-register">
+            <div class="container p-4 form-reg">
+
+                    <h2 class="text-center mb-5">CRM Sign Up</h2>
+
+
+                    <div class="stepwizard">
+                            <div class="stepwizard-row setup-panel">
+                                <div class="stepwizard-step col-xs-3"> 
+                                    <a href="#step-1" role="button" class="btn btn-success btn-circle">1</a>
+                                    <p><small>Create User</small></p>
+                                </div>
+                                <div class="stepwizard-step col-xs-3"> 
+                                    <a href="#step-2" role="button" class="btn btn-primary btn-circle" disabled="disabled">2</a>
+                                    <p><small>Your Company</small></p>
+                                </div>
+                                <div class="stepwizard-step col-xs-3"> 
+                                    <a href="#step-3" role="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                                    <p><small>Select Plan</small></p>
+                                </div>
+                                <div class="stepwizard-step col-xs-3"> 
+                                    <a href="#step-4" role="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+                                    <p><small>Payment</small></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <form role="form">
+                            <div class="panel panel-primary setup-content" id="step-1">
+                                <div class="panel-heading">
+                                     <h3 class="panel-title">Shipper</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label class="control-label">First Name</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Last Name</label>
+                                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" />
+                                    </div>
+                                    <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+                                </div>
+                            </div>
+                            
+                            <div class="panel panel-primary setup-content" id="step-2">
+                                <div class="panel-heading">
+                                     <h3 class="panel-title">Destination</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label class="control-label">Company Name</label>
+                                        <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Company Address</label>
+                                        <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address" />
+                                    </div>
+                                    <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+                                </div>
+                            </div>
+                            
+                            <div class="panel panel-primary setup-content" id="step-3">
+                                <div class="panel-heading">
+                                     <h3 class="panel-title">Schedule</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label class="control-label">Company Name</label>
+                                        <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Company Address</label>
+                                        <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address" />
+                                    </div>
+                                    <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+                                </div>
+                            </div>
+                            
+                            <div class="panel panel-primary setup-content" id="step-4">
+                                <div class="panel-heading">
+                                     <h3 class="panel-title">Cargo</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label class="control-label">Company Name</label>
+                                        <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Company Address</label>
+                                        <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address" />
+                                    </div>
+                                    <button class="btn btn-success pull-right" type="submit">Finish!</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+            </div>
+                
+    
+   <!--bootstrap js-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
+
+<script>
+$(document).ready(function () {
+
+var navListItems = $('div.setup-panel div a'),
+    allWells = $('.setup-content'),
+    allNextBtn = $('.nextBtn');
+
+allWells.hide();
+
+navListItems.click(function (e) {
+    e.preventDefault();
+    var $target = $($(this).attr('href')),
+        $item = $(this);
+
+    if (!$item.hasClass('disabled')) {
+        navListItems.removeClass('btn-success').addClass('btn-primary');
+        $item.addClass('btn-success');
+        allWells.hide();
+        $target.show();
+        $target.find('input:eq(0)').focus();
+    }
+});
+
+allNextBtn.click(function () {
+    var curStep = $(this).closest(".setup-content"),
+        curStepBtn = curStep.attr("id"),
+        nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+        curInputs = curStep.find("input[type='text'],input[type='url']"),
+        isValid = true;
+
+    $(".form-group").removeClass("has-error");
+    for (var i = 0; i < curInputs.length; i++) {
+        if (!curInputs[i].validity.valid) {
+            isValid = false;
+            $(curInputs[i]).closest(".form-group").addClass("has-error");
+        }
+    }
+
+    if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
+});
+
+$('div.setup-panel div a.btn-success').trigger('click');
+});
+</script>
+
+</body>
+
+</html>

@@ -92,7 +92,8 @@ router.post('/register', (req, res, next) => {
                                         birthday,
                                         dateRegistered,
                                         lastPassword,
-                                        lastPasswordUpdate
+                                        lastPasswordUpdate,
+                                        profileImg
                                         ) 
                                     VALUES 
                                     (
@@ -109,7 +110,8 @@ router.post('/register', (req, res, next) => {
                                         '${birthDay}',
                                         CURDATE(),
                                         '${hash}',
-                                        CURDATE()
+                                        CURDATE(),
+                                        'https://image.flaticon.com/icons/svg/149/149071.svg'
                                           );
                                     `
 

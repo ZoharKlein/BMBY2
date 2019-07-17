@@ -39,8 +39,8 @@ mongoose.Collection.dropIndexes
 
 
 const leadProcessSchema = new mongoose.Schema({
-    lead_id: { type : String , sparse : true, required : true },
-    user_id: {type : Number , sparse : true, required : true},
+    lead_id: { type : mongoose.Schema.Types.ObjectId , sparse : true, required : true , ref: 'Lead' },
+    user_id: {type : Number , sparse : true, required : true} ,
     now_status: {type : String , sparse : true, required : true},
     last_date_modified: {type : Date , sparse : true, required : true},
 
@@ -49,3 +49,4 @@ const leadProcessSchema = new mongoose.Schema({
 
 exports.LeadProcess = new mongoose.model('LeadProcess', leadProcessSchema)
 
+exports.ObjectId = mongoose.Types.ObjectId
