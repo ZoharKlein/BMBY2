@@ -1,13 +1,24 @@
 {
     "Dev": {
         "dbConfig": {
-            "host": "localhost",
-            "user": "root",
-            "port": 3306,
-            "dbName": "bmby2",
-            "password": "12345678",
-            "connectionLimit": 10,
-            "queueLimit": 0
+            "mySQL": {
+
+                "host": "localhost",
+                "user": "root",
+                "port": 3306,
+                "dbName": "bmby2",
+                "waitForConnections": true,
+                "password": "12345678",
+                "connectionLimit": 10,
+                "queueLimit": 0
+            },
+            "mongoDB":{
+                "mongoURL": "mongodb://localhost:27017/bamy2DB"
+            }
+        },
+        "bycripts" : {
+            "salt":10
         }
+        
     }
 }

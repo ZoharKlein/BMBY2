@@ -4,6 +4,8 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const registrationCheaker = require('./validationConfig/joiValidationConfig')
 
+const config = require('config');
+global.config = config
 
 ///Routers
 
@@ -15,12 +17,17 @@ const customersLogin = require('./routers/coustomers/login')
 const leadAPI = require('./routers/LeadApi/leadAPI')
 
 const dashboardNav = require('./routers/dashboardNav')
+//new project
+const homeRouter = require('./routers/home')
 
-
+//controllers
+const errorController = require('./controllers/errorController')
 
 
 
 const PORT = process.env.PORT || 3000
+
+
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -29,6 +36,22 @@ app.use(express.static("public"))
 
 
 app.set("view engine", "ejs")
+
+
+
+
+///////////////////// Home Page /////////////////////
+/**
+ * about
+ * our crm
+ * contact us
+ * login
+ * sign up
+ * learn more
+ * employee login
+ * employee sgin up
+ */
+app.use('/',homeRouter)
 
 
 
@@ -134,7 +157,11 @@ app.post('/dashboard/Leads', (req,res)=>{
     console.log('OK')
     res.send('OK')
 })*/
+/
 
+
+///////////////////// 404 Page /////////////////////
+app.use(errorController.get404);
 
 
 app.listen(PORT, () => console.log(PORT + " running"))

@@ -1,8 +1,11 @@
 const mongoose = require('mongoose')
+const dbConfig = global.config.get('Dev.dbConfig.mongoDB');
 
 
 
-mongoose.connect('mongodb://localhost:27017/bamy2DB', { useNewUrlParser: true })
+
+
+mongoose.connect(dbConfig.mongoURL, { useNewUrlParser: true })
 mongoose.set("useCreateIndex", true)
 
 const customerSchema = new mongoose.Schema({

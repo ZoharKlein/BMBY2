@@ -1,17 +1,19 @@
 const mysql = require('mysql2/promise');
-const config = require('config')
-const dbConfig = config.get('Dev.dbConfig');
+const dbConfig = global.config.get('Dev.dbConfig.mySQL');
 
 
 // Create the connection pool. The pool-specific settings are the defaults
 const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    database: 'bmby2',
-    password: '12345678',
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
+
+    host: dbConfig.host,
+   user: dbConfig.user,
+   port: dbConfig.port,
+   database: dbConfig.dbName,
+   password: dbConfig.password,
+   waitForConnections: true,
+   connectionLimit: dbConfig.connectionLimit,
+   queueLimit: dbConfig.queueLimit,
+   
 });
 
 
