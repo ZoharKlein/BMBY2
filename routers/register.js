@@ -41,7 +41,7 @@ router.post('/register', (req, res, next) => {
                             console.log('email allready exist')
                         } else {
                             //bcrypt.hash(req.body.password, 10, (err, hash) => {
-                                bcrypt.hash(req.body.password, global.config.get('Dev.dbConfig.bycripts').salt , (err, hash) => {
+                                bcrypt.hash(req.body.password, global.config.get('Dev.bycriptjs').salt , (err, hash) => {
                                 
 
                                 if (err) {

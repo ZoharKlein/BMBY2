@@ -16,7 +16,7 @@
                 "mongoURL": "mongodb://localhost:27017/bamy2DB"
             }
         },
-        "bycripts" : {
+        "bycriptjs" : {
             "salt":10
         }
         

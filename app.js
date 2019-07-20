@@ -42,7 +42,7 @@ app.set("view engine", "ejs")
 
 ///////////////////// Home Page /////////////////////
 /**
- * about
+ * about 
  * our crm
  * contact us
  * login

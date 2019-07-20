@@ -1,0 +1,33 @@
+<%-include("home-partials/header") -%>
+
+<title><%=title%></title>
+
+<%-include("home-partials/navbar") -%>
+
+<div class="container">
+    <div class="row d-flex align-items-center hero">
+        <div class="col-sm">
+            <h1 class="hero-title mb-4">Sign Up
+
+            <form action="/login" method="post">
+
+                <input value="<%= loginData.comapnyName %>" placeholder="Company Name" type="text" name="companyName">
+
+                <input value="<%= loginData.password %>" placeholder="Password" type="password" name="password">
+
+            <button type="submit">Login</button>
+
+            </form>
+
+            <form action="/facebook" method="post">
+
+                <button type="submit">Facebook</button>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+<%-include("home-partials/footer") -%>

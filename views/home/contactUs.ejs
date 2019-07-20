@@ -1,0 +1,42 @@
+<%-include("home-partials/header") -%>
+
+<title><%=title%></title>
+
+<%-include("home-partials/navbar") -%>
+
+
+
+<div class="container">
+    <div class="row d-flex align-items-center hero">
+        <div class="col-sm">
+
+            <% if (typeof send === 'undefined') { %>
+
+                <form action="/contact" method="post">
+
+                    <input placeholder="Name" type="text" name="name" >
+                    <input placeholder="Email" type="email" name="email" >
+                    <input placeholder="Title" type="text" name="title" >
+                    <textarea placeholder="Enter Here" name="msg" rows="10" cols="50"></textarea>
+                    <button type="submit">Send</button>
+
+                </form>
+
+            <% } else { %>
+          
+
+                <h1>Thank You For Sending Us</h1>
+
+            <% } %>
+
+    
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+<%-include("home-partials/footer") -%>

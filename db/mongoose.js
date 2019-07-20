@@ -2,23 +2,17 @@ const mongoose = require('mongoose')
 const dbConfig = global.config.get('Dev.dbConfig.mongoDB');
 
 
-
-
-
 mongoose.connect(dbConfig.mongoURL, { useNewUrlParser: true })
 mongoose.set("useCreateIndex", true)
 
 const customerSchema = new mongoose.Schema({
-    username:String, 
-    cid: Number,
-    email: String,
-    password: String,
+    companyName:{ type : String , unique : true, required : true}, 
+    email: { type : String , unique : true, required : true},
+    password: { type : String , sparse : true, required : true},
     facebookID: String,
     googleID:String,
 
-
 })
-
 
 exports.Customer = new mongoose.model('Coustomer', customerSchema)
 

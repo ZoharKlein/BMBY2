@@ -1,0 +1,41 @@
+<%-include("home-partials/header") -%>
+
+<title><%=title%></title>
+
+<%-include("home-partials/navbar") -%>
+
+<div class="container">
+    <div class="row d-flex align-items-center hero">
+        <div class="col-sm">
+            <h1 class="hero-title mb-4">Sign Up
+
+            <form action="/signup" method="post">
+
+                <% if (typeof signUpErr !== 'undefined') {%>
+                    <% for (i = 0; i < signUpErr.length; i++) { %>
+                        
+                        <label for=""><%= signUpErr[i].key %>: <%= signUpErr[i].msg %></label>
+                        <br>
+            
+                    <%}%>
+                 <br>
+                <%}%>
+
+                <input value="<%= signUpData.comapnyName %>" placeholder="Company Name" type="text" name="companyName">
+                <input value="<%= signUpData.email %>" placeholder="Email" type="email" name="email">
+
+                <input placeholder="Password" type="password" name="password">
+
+                <input placeholder="Verify Password" type="password" name="passwordVerify">
+
+                
+            <button type="submit">Sign Up</button>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+<%-include("home-partials/footer") -%>
