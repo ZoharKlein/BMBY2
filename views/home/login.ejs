@@ -9,9 +9,14 @@
         <div class="col-sm">
             <h1 class="hero-title mb-4">Sign Up
 
+            <% if (typeof errMsg !== "undefined") { %>
+
+                <label for=""><%=errMsg%></label>
+
+            <% } %>
             <form action="/login" method="post">
 
-                <input value="<%= loginData.comapnyName %>" placeholder="Company Name" type="text" name="companyName">
+                <input value="<%= loginData.email %>" placeholder="Email" type="text" name="email">
 
                 <input value="<%= loginData.password %>" placeholder="Password" type="password" name="password">
 

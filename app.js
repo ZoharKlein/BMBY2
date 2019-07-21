@@ -2,7 +2,10 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const cookieParser = require('cookie-parser')
 const registrationCheaker = require('./validationConfig/joiValidationConfig')
+
+const session = require('express-session')
 
 const config = require('config');
 global.config = config
@@ -17,8 +20,10 @@ const customersLogin = require('./routers/coustomers/login')
 const leadAPI = require('./routers/LeadApi/leadAPI')
 
 const dashboardNav = require('./routers/dashboardNav')
+
 //new project
 const homeRouter = require('./routers/home')
+const dashboardRouter = require('./routers/dashboard')
 
 //controllers
 const errorController = require('./controllers/errorController')
@@ -38,7 +43,19 @@ app.use(express.static("public"))
 app.set("view engine", "ejs")
 
 
+app.use(cookieParser())
 
+app.use(session({
+    name: "sid",
+    saveUninitialized: false,
+    secret: "zohar", 
+    cookie: { 
+        maxAge: 10000,
+        sameSite: true,
+        saveUninitialized: false,
+        resave: false
+
+    }}))
 
 ///////////////////// Home Page /////////////////////
 /**
@@ -54,6 +71,12 @@ app.set("view engine", "ejs")
 app.use('/',homeRouter)
 
 
+
+///////////////////// Dashboard For Customers /////////////////////
+/**
+ * 
+ */
+app.use('/dashboard/',dashboardRouter)
 
 
 
@@ -151,7 +174,7 @@ app.use('/api/lead',leadAPI)
 ///////////////////// dashboard /////////////////////
 
 
-app.use('/dashboard',dashboardNav)
+//app.use('/dashboard',dashboardNav)
 /*
 app.post('/dashboard/Leads', (req,res)=>{
     console.log('OK')

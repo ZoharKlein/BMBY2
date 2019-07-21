@@ -1,6 +1,6 @@
 exports.getHome = (req, res, next) => {
 
-    console.log('about')
+  console.log(req.session)
       res.render('home/home',{
         title: "BMBY2"
       })

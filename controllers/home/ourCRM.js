@@ -1,5 +1,5 @@
 exports.getOurCRM = (req, res, next) => {
-
+ 
     res.render('home/ourCrm',{
       title: "Our CRM"
     })

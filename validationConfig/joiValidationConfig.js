@@ -42,7 +42,7 @@ const leadSchema = Joi.object().keys({
 
 
 const customerSchema = Joi.object().keys({
-    comapnyName: joiValDef.bigLetterFirst_aToz_2To20.error(() => 'Company name must have only letters'),
+    companyName: joiValDef.bigLetterFirst_aToz_2To20.error(() => 'Company name must have only letters'),
     email: joiValDef.email_standard.error(() => 'Example : email@company.com '),
     password: joiValDef.password_leterAndNumberMost_8To30.error(() => 'Must have at least letter and digit'),
 
@@ -58,25 +58,30 @@ module.exports.customerValid = (...parms) => {
     let errArr = []
 
     Joi.validate({
-        comapnyName: customer.comapnyName,
+        companyName: customer.companyName,
         email: customer.email,
         password: customer.password,
         
     }, customerSchema, {abortEarly: false} ,(err, value) => {
 
     if (err) {
-        
+        console.log(err)
+        let i = 0
         err.details.forEach(element => { 
-  
+
+            if (i % 2 === 0) {
+
             errObject = {
                 msg: element.message,
                 key: element.path[0]
             }
-            errArr.push(errObject)
+            
+        }
+        
         })
         
 }})
-
+console.log(errArr)
 return errArr
 }
     
