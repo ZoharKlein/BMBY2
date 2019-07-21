@@ -50,7 +50,7 @@ app.use(session({
     saveUninitialized: false,
     secret: "zohar", 
     cookie: { 
-        maxAge: 10000,
+        maxAge: 1000 * 60 * 24 * 7,//week
         sameSite: true,
         saveUninitialized: false,
         resave: false

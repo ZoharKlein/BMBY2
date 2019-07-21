@@ -1,22 +1,28 @@
 const mongooseDB = require('../db/mongoose')
 
 module.exports = class Customer {
+
+
     constructor(...parms) {
         const data = parms[0]
 
         this.customer = mongooseDB.Customer({
             companyName: data.companyName, 
             email: data.email,
-            password: data.password
+            password: data.password,
+            lane: 'None'
         })
         
     }
+
+
+
      save() {
         let customerInDB = false
 
                 return this.customer.save()
                 .then(saveResult => {
-                    console.log(saveResult)
+                    // console.log(saveResult)
                     return true
                 })
                 .catch(saveErr => { 
@@ -29,4 +35,6 @@ module.exports = class Customer {
                     })
                 
             }
+        
+        
 }

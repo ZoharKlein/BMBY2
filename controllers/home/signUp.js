@@ -49,7 +49,7 @@ exports.postSignUp = (req, res, next) => {
                                 res.render('home/login',{
                                   title: "Login",
                                   loginData : {
-                                    comapnyName : req.body.companyName,
+                                    email : req.body.email,
                                     password: req.body.password,
                                   }
                                 })

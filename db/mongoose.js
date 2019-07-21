@@ -11,6 +11,7 @@ const customerSchema = new mongoose.Schema({
     password: { type : String , sparse : true, required : true},
     facebookID: String,
     googleID:String,
+    lane : String
 
 })
 

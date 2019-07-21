@@ -1,0 +1,38 @@
+<!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
+
+<section class="pricing py-5">
+  <div class="container">
+    <div class="row">
+
+
+    <% for(i = 0; i < laneMenu.length; i++) { %>
+
+        <!-- Free Tier -->
+        <div class="col-lg-4">
+          <div class="card mb-5 mb-lg-0">
+            <div class="card-body">
+              <h5 class="card-title text-muted text-uppercase text-center"><%=laneMenu[i].timeLength%> Year's</h5>
+              <h6 class="card-price text-center"><%=laneMenu[i].price%><span class="period"><%=laneMenu[i].coin%></span></h6>
+              <hr>
+                  <% for(j = 0; j < laneMenu[i].details.length; j++) { %>
+
+                    <ul class="fa-ul">
+                      <li><span class="fa-li"><i class="fas fa-check"></i></span><%=laneMenu[i].details[j]%></li>
+                    </ul>
+
+                <% } %>
+                <form action="/dashboard/buy" methood>
+                    <label name="lane" value="<%=laneMenu[i].timeLength%>">
+                    <button type="submit" class="btn btn-block btn-primary text-uppercase">Buy</button>
+                
+                </form>
+            
+            </div>
+          </div>
+        </div>
+    
+    <% } %>
+      
+    </div>
+  </div>
+</section>
