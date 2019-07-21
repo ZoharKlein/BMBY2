@@ -17,7 +17,7 @@
                   <% for(j = 0; j < laneMenu[i].details.length; j++) { %>
 
                     <ul class="fa-ul">
-                      <li><span class="fa-li"><i class="fas fa-check"></i></span><%=laneMenu[i].details[j]%></li>
+                      <li><span class="fa-li"><i class="fas fa-check"></i></span><%=(j+1) +'. ' + laneMenu[i].details[j]%></li>
                     </ul>
 
                 <% } %>
