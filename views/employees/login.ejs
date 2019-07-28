@@ -13,57 +13,38 @@
     <link rel="stylesheet" href="/css/modal.css">
     <link rel="stylesheet" href="/css/Register.css">
 
-    <title>Register to Bmby CRM</title>
+    <title><%= title %></title>
 </head>
 
 <body>
  
  
  <!-- Modal -->
- <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-   aria-hidden="true">
-   <div class="modal-dialog" role="document">
-     <div class="modal-content">
-       <div class="modal-header">
-         <h2 class="modal-title mb-4" id="exampleModalLabel">Sign In</h2>
-         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-           <span aria-hidden="true">&times;</span>
-         </button>
-       </div>
-       <div class="modal-body">
+<div class="container">
+    <div class="row d-flex align-items-center hero">
+        <div class="col-sm">
+            <h1 class="hero-title mb-4">Login</h1>
+            <br>
 
-         <form action="/login" method="post" >
+            <% if (typeof errMsg !== "undefined") { %>
 
-          <div class="form-group">
-            <input type="text" name="username" class="form-control" required>
-            <label class="form-control-placeholder" for="username">Email</label>
-          </div>
-          <div class="form-group">
-            <input type="password" name="password" class="form-control" required>
-            <label class="form-control-placeholder" for="password">Password</label>
-          </div>
+                <label for=""><%=errMsg%></label>
 
-           <% if (typeof error !== "undefined") {%>
-           <h2><%=error%></h2>
-           <% } %>
-           
-           <div class="forgot">
-              <small class="text-muted"><a href="#">Forgot something?</a></small>
-          </div>
+            <% } %>
+            <form action="/employees/login" method="post">
 
-           <button type="submit" class="btn btn-success btn-block btn-lg modal-btn">Login</button>
-                   
-         </form>
-         
+                <input value="<%= loginData.email %>" placeholder="Email" type="text" name="email">
 
-       </div>
-       <div class="modal-footer mt-5">
-          <p>Don't have an account?</p>
-          <p><a href="/register">Sign Up Now</a></p>
-         </div>
-     </div>
-   </div>
- </div>
+                <input value="<%= loginData.password %>" placeholder="Password" type="password" name="password">
+
+            <button type="submit">Login</button>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
  </body>
 
 </html>

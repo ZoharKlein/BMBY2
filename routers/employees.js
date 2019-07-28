@@ -13,6 +13,9 @@ router.route('/signup')
 
 router.route('/login')
 .get(loginController.getLogin)
+.post(loginController.postLogin)
+
+    
 module.exports = router
 
 

@@ -32,6 +32,7 @@ exports.InsertDataFromMySQL = async(sqlCommand) => {
 }
 
 exports.findUserByMail = email => {return `SELECT * FROM users WHERE email = '${email}'`}
+exports.findUserByMailAndPassword = (email,password) => {return `SELECT * FROM users WHERE email = '${email}' AND 'password' = '${password}'`}
 exports.insertNewUser = (...user) => {
     console.log('user:', user)
     return `INSERT INTO users 
