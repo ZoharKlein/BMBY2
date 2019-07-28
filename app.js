@@ -24,6 +24,8 @@ const dashboardNav = require('./routers/dashboardNav')
 //new project
 const homeRouter = require('./routers/home')
 const dashboardRouter = require('./routers/dashboard')
+const employeesRouter = require('./routers/employees')
+
 
 //controllers
 const errorController = require('./controllers/errorController')
@@ -77,6 +79,17 @@ app.use('/',homeRouter)
  * 
  */
 app.use('/dashboard/',dashboardRouter)
+
+
+///////////////////// Employee /////////////////////
+
+app.use('/employees/',employeesRouter)
+
+
+
+
+
+
 
 
 

@@ -17,12 +17,12 @@ const joiValDef = {
 
 
 const userSchema = Joi.object().keys({
-    firstname: joiValDef.bigLetterFirst_aToz_2To20,
-    lastname: joiValDef.bigLetterFirst_aToz_2To20,
-    city: joiValDef.bigLetterFirst_aToz_2To30,
-    mobile: joiValDef.phone_plusAnd1To3Prefix_9dgigit,
-    email: joiValDef.email_standard,
-    password: joiValDef.password_leterAndNumberMost_8To30,
+    firstname: joiValDef.bigLetterFirst_aToz_2To20.error(() => 'First name must have only letters!'),
+    lastname: joiValDef.bigLetterFirst_aToz_2To20.error(() => 'Last name must have only letters!'),
+    city: joiValDef.bigLetterFirst_aToz_2To30.error(() => 'City must have only letters!'),
+    mobile: joiValDef.phone_plusAnd1To3Prefix_9dgigit.error(() => 'Phone must have (+972) prefix and 9 digit!'),
+    email: joiValDef.email_standard.error(() => 'Example : email@company.com '),
+    password: joiValDef.password_leterAndNumberMost_8To30.error(() => 'Must have at least letter and digit'),
 
 })
 
@@ -75,6 +75,7 @@ module.exports.customerValid = (...parms) => {
                 msg: element.message,
                 key: element.path[0]
             }
+            errArr.push(errObject)
             
         }
         
@@ -85,6 +86,47 @@ console.log(errArr)
 return errArr
 }
     
+module.exports.userValid = (...parms) => {
+    
+    const user = parms[0]
+    let errArr = []
+    console.log(user)
+
+    Joi.validate({
+        firstname: user.firstname,
+        lastname: user.lastname,
+        city: user.city,
+        mobile: user.mobile,
+        email: user.email,
+        password: user.password
+    
+        
+    }, userSchema, {abortEarly: false} ,(err, value) => {
+
+    if (err) {
+        //console.log(err)
+        let i = 0
+        err.details.forEach(element => { 
+
+            if (i % 2 === 0) {
+
+            errObject = {
+                msg: element.message,
+                key: element.path[0]
+            }
+            errArr.push(errObject)
+        }
+        
+        })
+        
+}})
+console.log(errArr)
+return errArr
+}
+
+
+
+
 /** lead fields
  * 
  * cid - company id
