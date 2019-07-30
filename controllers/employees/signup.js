@@ -44,7 +44,7 @@ exports.postSignUp = (req, res, next) => {
       })
     }
     else {
-      mysql.GetDataFromMySQL(mysql.findUserByMail(req.body.email))
+      mysql.EnterQuery(mysql.findUserByMail(req.body.email))
       .then(result => {
         if (result.length > 0 )
         res.render('employees/signup',{

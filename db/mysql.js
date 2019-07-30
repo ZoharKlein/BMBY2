@@ -17,7 +17,7 @@ const pool = mysql.createPool({
 });
 
 
-exports.GetDataFromMySQL = async(sqlCommand) => {
+exports.EnterQuery = async(sqlCommand) => {
     //return getAllBlogPost(sqlCommand)
     const result = await pool.query(sqlCommand);
     return result[0];
@@ -30,9 +30,14 @@ exports.InsertDataFromMySQL = async(sqlCommand) => {
 
 
 }
-
+//select
+exports.findAllUsersExeptOne = userID => {return `SELECT * FROM users WHERE userID = '${userID}'`}
 exports.findUserByMail = email => {return `SELECT * FROM users WHERE email = '${email}'`}
 exports.findUserByMailAndPassword = (email,password) => {return `SELECT * FROM users WHERE email = '${email}' AND 'password' = '${password}'`}
+exports.findUsersByRole = (role) => {return `SELECT * FROM users WHERE role='${role}'`}
+exports.findUsersByStatus = (status) => {return `SELECT * FROM users  WHERE status ='${status}'`}
+
+//insert
 exports.insertNewUser = (...user) => {
     console.log('user:', user)
     return `INSERT INTO users 

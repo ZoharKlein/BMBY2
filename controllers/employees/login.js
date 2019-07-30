@@ -17,7 +17,7 @@ exports.getLogin = (req, res, next) => {
 
     //change to passport after i finsh
 
-    mysql.GetDataFromMySQL(mysql.findUserByMail(req.body.email))
+    mysql.EnterQuery(mysql.findUserByMail(req.body.email))
     .then(user => { 
       console.log(user)
       if (user.length > 0 ) {
@@ -28,8 +28,15 @@ exports.getLogin = (req, res, next) => {
           } else {
             if (isMatch) {
               console.log('ok')
+              global.loginEmployee = user[0]
+              console.log(global.loginEmployee)
+
+              res.redirect('/employees/dashboard')
+
+
               //render thd dashboard
             }
+            
             else {
               res.render('employees/login',{
                 title: "Login",
@@ -44,6 +51,7 @@ exports.getLogin = (req, res, next) => {
       }) 
 
       }
+      
       else {
         res.render('employees/login',{
           title: "Login",
@@ -55,9 +63,6 @@ exports.getLogin = (req, res, next) => {
         })
       }
       
-      
-    
-    
     })
     .catch(mysqlErr => {console.log(mysqlErr) })
 
