@@ -32,9 +32,6 @@ exports.getLogin = (req, res, next) => {
               console.log(global.loginEmployee)
 
               res.redirect('/employees/dashboard')
-
-
-              //render thd dashboard
             }
             
             else {

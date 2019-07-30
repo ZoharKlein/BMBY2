@@ -31,7 +31,7 @@ exports.InsertDataFromMySQL = async(sqlCommand) => {
 
 }
 //select
-exports.findAllUsersExeptOne = userID => {return `SELECT * FROM users WHERE userID = '${userID}'`}
+exports.findAllUsersExeptOne = userID => {return `SELECT * FROM users WHERE NOT userID = '${userID}'`}
 exports.findUserByMail = email => {return `SELECT * FROM users WHERE email = '${email}'`}
 exports.findUserByMailAndPassword = (email,password) => {return `SELECT * FROM users WHERE email = '${email}' AND 'password' = '${password}'`}
 exports.findUsersByRole = (role) => {return `SELECT * FROM users WHERE role='${role}'`}
@@ -73,3 +73,7 @@ VALUES
     'https://image.flaticon.com/icons/svg/149/149071.svg'
       );
 `}
+
+
+//limit
+exports.limitFromStartToEnd = (start,end) => {return `LIMIT ${start},${end}`}

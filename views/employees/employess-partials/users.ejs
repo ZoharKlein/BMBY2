@@ -1,0 +1,31 @@
+<div>
+    
+<table>
+            <tr>
+                <td>First Name</td>
+                <td>Last Name</td>
+                <td>Email</td>
+                <td>Mobile</td>
+                <td>Status</td>
+                <td>Role</td>            
+            </tr>  
+
+
+    <%  for(i = 0 ; i < users.length ; i++) { %>
+        
+            
+            <tr>
+                <td><%= users[i].firstName %></td>
+                <td><%= users[i].lastName %></td>
+                <td><%= users[i].email %></td>
+                <td><%= users[i].mobile %></td>
+                <td><%= users[i].status %></td>
+                <td><%= users[i].role %></td> 
+
+            </tr>      
+    <% } %>
+
+
+</table>
+
+</div>

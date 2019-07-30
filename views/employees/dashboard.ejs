@@ -82,13 +82,13 @@
 
         <div class="cur-user">
           <img src="<%=user.profileImg%>" class="cur-user__pic" alt="user pic" id="cur-user-pic">
-          <h5 class="cur-user__name" id="cur-user-name"><%=`${user.firstName} ${user.lastName}` %></h5>
+          <h5 class="cur-user__name" id="cur-user-name"><%=user.firstName %> <%=user.lastName %></h5>
           <p class="cur-user__role" id="cur-user-role"><%=user.role%></p>
         </div>
 
         <% for(i = 0; i < userMenu.length; i++) { %> 
 
-            <a href="/employees/dashboard/<%=userMenu[i]%>" class="list-group-item list-group-item-action bg-light"><%=userMenu[i]%></a>
+            <a href="/employees/dashboard/<%=userMenu[i].toLowerCase()%>" class="list-group-item list-group-item-action bg-light"><%=userMenu[i]%></a>
           
  
         <% } %>
@@ -101,6 +101,25 @@
     <div id="page-content-wrapper">
 
       <div class="container-fluid">
+
+
+
+
+
+      <!-- new -->
+
+        <% if (typeof content !== 'undefined') {%>
+
+            <%  if (content === 'Users') { %>
+
+
+                <%-include("employess-partials/users") -%>
+
+            <% } %>
+
+        <% } %>
+
+      <!-- end -->
 
 
         <% if (typeof leads !== 'undefined') {%>
