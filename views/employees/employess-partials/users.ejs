@@ -1,31 +1,90 @@
 <div>
-    
-<table>
+
+
+   <form action="users" method="post">
+        <div class="sort-selction">
+
+            <h3>Order BY</h3>
+            <select name="option">
+
+            <% console.log(select.selector.length) %>
+
+
+            <% for(i = 0; i < select.selector.length ; i ++) { %>
+               <% if (select.selected === select.selector[i].orderBy) { %>
+                    
+                    <option selected value="<%= select.selector[i].orderBy %>"><%= select.selector[i].view %></option>
+
+              <%  } else { %>
+                    
+                    <option value="<%= select.selector[i].orderBy %>"><%= select.selector[i].view %></option>
+
+             <% } %>
+
+             <% } %>
+
+
+             
+            </select>
+
+            <button name="changepage" value="<%= pageData.pageIndex%>" type="submit">Order</button>
+        </div>
+
+
+
+<table class="dashboard-tale">
             <tr>
                 <td>First Name</td>
                 <td>Last Name</td>
                 <td>Email</td>
                 <td>Mobile</td>
                 <td>Status</td>
-                <td>Role</td>            
+                <td>Role</td>
+                <td></td>
+                <td></td>            
             </tr>  
 
 
-    <%  for(i = 0 ; i < users.length ; i++) { %>
+
+    <%  for(i = 0 ; i < users.length - 1 ; i++) { %>
         
-            
-            <tr>
+            <% if (i % 2 === 0) { %>
+                     <tr class="double">
+                <% } else { %>
+                <tr >
+            <% } %>
+
+
+ 
                 <td><%= users[i].firstName %></td>
                 <td><%= users[i].lastName %></td>
                 <td><%= users[i].email %></td>
                 <td><%= users[i].mobile %></td>
                 <td><%= users[i].status %></td>
-                <td><%= users[i].role %></td> 
+                <td><%= users[i].role %></td>
+                <td><button type="">Edit</button></td>
+                <td><button type="">Delete</button></td> 
 
             </tr>      
     <% } %>
-
+    
 
 </table>
 
+    <div class="paging">
+
+
+        
+        <% if (pageData.prev) { %>
+            <button name="changepage" value="<%= pageData.pageIndex - 1 %>" class="prev page-btn" type="submit">Prev</button> 
+        <% } %>
+        
+
+        <% if (pageData.next) { %>
+            <button name="changepage" value="<%= pageData.pageIndex + 1%>" class="next page-btn" type="submit">Next</button>
+        <% } %>
+        
+
+    </div>
+</form>
 </div>

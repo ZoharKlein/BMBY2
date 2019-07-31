@@ -77,3 +77,7 @@ VALUES
 
 //limit
 exports.limitFromStartToEnd = (start,end) => {return `LIMIT ${start},${end}`}
+
+
+//orders
+exports.orderBy = (order) => {return `ORDER BY ${order}`}

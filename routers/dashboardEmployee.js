@@ -13,6 +13,12 @@ router.route('/')
 
 router.route('/users')
 .get(usersController.getUsers)
+.post(usersController.postUsers)
+
+router.route('/users/:params')
+.post(usersController.postUsersByParms)
+
+
 
 module.exports = router
 

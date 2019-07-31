@@ -1,0 +1,39 @@
+.dashboard-tale {
+    margin: 100px auto 0px;
+    padding: 20px;
+    width: 80%;
+    border-collapse: collapse;
+    border-radius: 0.5em;
+    overflow: hidden;
+
+  
+}
+
+.dashboard-tale tr{ 
+    text-align: center;
+    background-color: #dadada;
+    border-bottom: 1px solid black; 
+
+
+}
+.dashboard-tale tr td{ 
+    padding: 5px;
+
+}
+
+.dashboard-tale .double{ 
+    text-align: center;
+    background-color: #9cf196;
+}
+.paging {
+    width: 70%;
+    margin: 20px auto;
+    border: none;
+}
+
+.next {
+    float: right;
+}
+.prev {
+    float: left;
+}
