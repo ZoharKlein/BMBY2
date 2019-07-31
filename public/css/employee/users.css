@@ -1,5 +1,5 @@
 .dashboard-tale {
-    margin: 100px auto 0px;
+    margin: 20px auto 0px;
     padding: 20px;
     width: 80%;
     border-collapse: collapse;
@@ -31,9 +31,48 @@
     border: none;
 }
 
+
+button,
+button:visited {
+    display: inline-block;
+    font-weight: 200;
+    text-decoration: none;
+    border-radius: 200px;
+    transition: background-color 0.4s;
+    background-color: #9cf196;
+    border: 1px solid #ffdd67;
+}
+
+
+button:hover,
+button:active {
+    background-color: #ffdd67;
+    border: 1px solid #9cf196;
+    
+
+}
+
+.paging button{
+    background-color: #ffdd67;
+    border: 1px solid #9cf196;
+}
+
 .next {
     float: right;
+
 }
 .prev {
     float: left;
+
+}
+
+.sort-selction {
+    width: 70%;
+    float: left;
+    padding-top: 100px; 
+}
+.sort-selction button{
+    background-color: #ffdd67;
+    border: 1px solid #9cf196;
+
 }
