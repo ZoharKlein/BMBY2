@@ -43,7 +43,7 @@ exports.insertNewUser = (...user) => {
     return `INSERT INTO users 
 ( 
     firstName,
-    lsatName,
+    lastName,
     city,
     mobile,
     email,
@@ -73,6 +73,10 @@ VALUES
     'https://image.flaticon.com/icons/svg/149/149071.svg'
       );
 `}
+
+//update
+exports.updateProfileImgByID = (imgURL,userID) => {return `UPDATE users SET profileImg = "${imgURL}" WHERE userID = ${userID}`}
+
 
 
 //limit

@@ -76,7 +76,7 @@ exports.postSignUp = (req, res, next) => {
                 res.render('employees/login',{
                   title: "Login",
                   signUpErr: errMsg,
-                  signUpData : {
+                  loginData : {
                     email: req.body.email,
                     password: req.body.password, 
                 }

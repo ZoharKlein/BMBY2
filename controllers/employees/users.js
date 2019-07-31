@@ -7,7 +7,6 @@ const sortSelector = {
     selected: 'firstName'
 }
 
-////// change to copy code from post and get!
 const paging = {
     next: false,
     prev: false,
@@ -46,18 +45,6 @@ setPageData = (listOfUsers) => {
         paging.next = false
     }
 }
-
-
-
-///test
-
-exports.postUsersByParms = (req, res, next) => {
-
-  
-
-
-}
-
 
 renderTable = (req,res,next, pageIndex = 0,order = "userID") => {
 

@@ -23,7 +23,7 @@
 
 .dashboard-tale .double{ 
     text-align: center;
-    background-color: #9cf196;
+    background-color: #39ae4a;
 }
 .paging {
     width: 70%;
@@ -32,29 +32,58 @@
 }
 
 
-button,
-button:visited {
+.users button,
+.users button:visited {
     display: inline-block;
     font-weight: 200;
     text-decoration: none;
     border-radius: 200px;
     transition: background-color 0.4s;
-    background-color: #9cf196;
-    border: 1px solid #ffdd67;
 }
 
 
-button:hover,
-button:active {
-    background-color: #ffdd67;
-    border: 1px solid #9cf196;
+.btn-odd,
+.btn-odd:visited {
+    background-color: #39ae4a;
+    border: 1px solid #dadada;
+    color: white;
     
 
 }
 
+.btn-odd:hover,
+.btn-odd:active {
+    background-color: #dadada;
+    border: 1px solid #39ae4a;
+    color: #39ae4a;
+    
+
+}
+
+
+
+.btn-double,
+.btn-double:visited {
+    background-color: #dadada;
+    border: 1px solid #39ae4a;
+    color: #39ae4a;
+}
+
+
+.btn-double:hover,
+.btn-double:active {
+    background-color: #39ae4a;
+    border: 1px solid #dadada;
+    color: #dadada;
+    
+
+}
+
+
+
 .paging button{
-    background-color: #ffdd67;
-    border: 1px solid #9cf196;
+    background-color: #f7c22b;
+    border: 1px solid #39ae4a;
 }
 
 .next {
@@ -72,7 +101,7 @@ button:active {
     padding-top: 100px; 
 }
 .sort-selction button{
-    background-color: #ffdd67;
-    border: 1px solid #9cf196;
+    background-color: #f7c22b;
+    border: 1px solid #39ae4a;
 
 }

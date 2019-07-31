@@ -1,0 +1,86 @@
+<div class="settings">
+    <h1><%= content %></h1>
+
+
+
+    <div class="menu-collapse">
+        
+        <button class="collapsible"><i class="fas fa-user-circle"> Change profile image</i></button>
+        <div class="content">
+        <form action="settings" method="post">
+          <label >Change Img (URL) : </label>
+          <input type="text" name="imgURL" value="">
+
+          <button name="update" value="img" type="submit">Update image</button>
+          </form>
+        </div>
+
+        <button class="collapsible"><i class="fas fa-user-edit"> Edit personal details</i></button>
+        
+        <div class="content">
+          <form action="settings" method="post">
+          <label >First Name : </label>
+          <input type="text" name="firstName" value="<%=user.firstName %>">
+          <br>
+          <label >Last Name : </label>
+          <input type="text" name="lastName" value="<%=user.lastName %>">
+          <br>
+          <label >City: </label>
+          <input type="text" name="city" value="<%=user.city %>">
+          <br>
+          <label >Phone : </label>
+          <input type="text" name="mobile" value="<%=user.mobile %>">
+          <br>
+          <label >Email : </label>
+          <input type="text" name="email" value="<%=user.email %>">
+          
+          <button name="update" value="details" type="submit">Update details</button>
+          </form>
+
+          
+        </div>
+
+        <button class="collapsible"><i class="fas fa-unlock-alt"> Change password</i></button>
+        
+        <div class="content">
+
+          <form action="settings" method="post">
+              
+          <label >Old password</label>
+          <input type="password" name="oldPassword" value="">
+          <br>
+          <label >New password</label>
+          <input type="password" name="password" value="">
+          <br>
+          <label >Verify new password</label>
+          <input type="password" name="passwordVerify" value="">
+          <br>
+          <button name="update" value="password" type="submit">Update password</button>
+          </form>
+        </div>
+
+    </div>
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+
+    </form>
+
+
+</div>
+
+

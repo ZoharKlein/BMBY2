@@ -1,13 +1,13 @@
-<div>
+<div class="users">
+
+
 
 
    <form action="users" method="post">
         <div class="sort-selction">
 
+            <button name="changepage" value="<%= pageData.pageIndex%>" type="submit">Order</button>
             <select name="option">
-
-            <% console.log(select.selector.length) %>
-
 
             <% for(i = 0; i < select.selector.length ; i ++) { %>
                <% if (select.selected === select.selector[i].orderBy) { %>
@@ -21,12 +21,10 @@
              <% } %>
 
              <% } %>
-
-
              
             </select>
 
-            <button name="changepage" value="<%= pageData.pageIndex%>" type="submit">Order</button>
+           
         </div>
 
 
@@ -39,8 +37,7 @@
                 <td>Mobile</td>
                 <td>Status</td>
                 <td>Role</td>
-                <td></td>
-                <td></td>            
+                <td></td>        
             </tr>  
 
 
@@ -61,8 +58,14 @@
                 <td><%= users[i].mobile %></td>
                 <td><%= users[i].status %></td>
                 <td><%= users[i].role %></td>
-                <td><button type="">Edit</button></td>
-                <td><button type="">Delete</button></td> 
+                <td>
+                <% if (i % 2 === 0) { %>
+                     <button class="btn-double" type="">Edit</button>
+                <% } else { %>
+                 <button class="btn-odd" type="">Edit</button>
+            <% } %>
+            </td>
+                
 
             </tr>      
     <% } %>
@@ -87,3 +90,5 @@
     </div>
 </form>
 </div>
+
+

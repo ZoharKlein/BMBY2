@@ -22,6 +22,9 @@
   <link href="/css/home.css" rel="stylesheet">
   <link href="/css/modal.css" rel="stylesheet">
   <link href="/css/employee/users.css" rel="stylesheet">
+  <link href="/css/employee/settings.css" rel="stylesheet">
+
+  
 
 
 </head>
@@ -71,9 +74,13 @@
             <h1>Must Login First</h1>
     <%} else { %>
 
-    
-    
 
+      <% if (user.status !== 'approved') {%>
+
+            <h1>Need To Wait For Admin Hack</h1>
+    <%} else { %>
+    
+      
   <div class="d-flex" id="wrapper">
 
     <!-- Sidebar -->
@@ -116,7 +123,16 @@
 
                 <%-include("employess-partials/users") -%>
 
+            <% } else if (content === 'Settings') {%>
+
+
+              <%-include("employess-partials/settings") -%>
+
             <% } %>
+
+
+
+
 
         <% } %>
 
@@ -148,7 +164,7 @@
           <button type="">Edit profile</button>
         
         <%} %>
-
+  <%} %>
       </div>
 
 
