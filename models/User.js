@@ -27,14 +27,14 @@ module.exports = class User {
     }
 
 }
-exports.userRole = userRole = {
+module.exports.userRole = {
     SUPER_ADMINISTRATOR: "super administrator",
     ADMINISTRATOR: "administrator",
     WORKER: "worker"
 }
 
 
-exports.userStats = userStats = {
+module.exports.userStats = {
     WAIT_FOR_HACK: "wait for admin hack",
     APPROVED: "approved",
     SUSPENDED: "suspended",

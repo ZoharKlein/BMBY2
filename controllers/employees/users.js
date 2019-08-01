@@ -22,9 +22,36 @@ exports.getUsers = (req, res, next) => {
 
 exports.postUsers = (req, res, next) => {
 
-    console.log(req.body.option)
-    sortSelector.selected = req.body.option
-    renderTable(req,res,next,parseInt(req.body.changepage),req.body.option)
+    const userID = req.body.userID
+    const status = req.body.statusUpdateOption
+    const role = req.body.roleUpdateOption
+
+
+
+    if (req.body.btnEdit === "edit") {
+        
+
+
+        mysql.EnterQuery(mysql.updateRoleAnStausByID(role,status,userID))
+        .then(result => {
+            renderTable(req,res,next)
+        })
+        .catch(err => { console.log(err) })     
+    }
+    else if (req.body.btnEdit === 'delete') {
+
+        mysql.EnterQuery(mysql.deleteUserByID(userID))
+        .then(result => {
+            renderTable(req,res,next)
+        })
+        .catch(err => { console.log(err) })    
+    }
+    else {
+        renderTable(req,res,next,parseInt(req.body.changepage),req.body.option)
+        
+    }
+
+
 
 
 }
@@ -48,9 +75,9 @@ setPageData = (listOfUsers) => {
 
 renderTable = (req,res,next, pageIndex = 0,order = "userID") => {
 
-    console.log(order)
+  //  console.log(order)
     paging.pageIndex = pageIndex
-    console.log(paging.pageIndex)
+//    console.log(paging.pageIndex)
 
     let menu
 
@@ -60,10 +87,10 @@ renderTable = (req,res,next, pageIndex = 0,order = "userID") => {
         menu = User.selectMenuByRole(global.loginEmployee.role)
     }
 
-console.log(`${mysql.findAllUsersExeptOne(global.loginEmployee.userID)}
-${mysql.orderBy(order)}                  
-${mysql.limitFromStartToEnd(paging.pageIndex * 10,paging.itemPerPage + 1)}
-`)
+//console.log(`${mysql.findAllUsersExeptOne(global.loginEmployee.userID)}
+//${mysql.orderBy(order)}                  
+//${mysql.limitFromStartToEnd(paging.pageIndex * 10,paging.itemPerPage + 1)}
+//`)
 
     mysql.EnterQuery(`${mysql.findAllUsersExeptOne(global.loginEmployee.userID)}
                       ${mysql.orderBy(order)}                  
@@ -71,7 +98,7 @@ ${mysql.limitFromStartToEnd(paging.pageIndex * 10,paging.itemPerPage + 1)}
                       ` )
     .then(result => {
 
-        console.log(req.params);
+        //console.log(req.params);
         
         const listOfUsers = result
         console.log('listofusers')
@@ -86,7 +113,9 @@ ${mysql.limitFromStartToEnd(paging.pageIndex * 10,paging.itemPerPage + 1)}
             content: "Users",
             users: listOfUsers,
             pageData : paging,
-            select: sortSelector
+            select: sortSelector,
+            userRoles: User.userRole,
+            userStats: User.userStats
           })
 
 

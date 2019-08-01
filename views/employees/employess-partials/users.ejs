@@ -1,13 +1,16 @@
 <div class="users">
 
 
+<script>
 
-
-   <form action="users" method="post">
+</script>
+<form action="users" method="post">
+   
         <div class="sort-selction">
 
             <button name="changepage" value="<%= pageData.pageIndex%>" type="submit">Order</button>
             <select name="option">
+
 
             <% for(i = 0; i < select.selector.length ; i ++) { %>
                <% if (select.selected === select.selector[i].orderBy) { %>
@@ -59,10 +62,11 @@
                 <td><%= users[i].status %></td>
                 <td><%= users[i].role %></td>
                 <td>
+
                 <% if (i % 2 === 0) { %>
-                     <button class="btn-double" type="">Edit</button>
+                     <button onClick="showModal(<%= JSON.stringify(users) %>,<%=i%>)" class="btn-double" type="">Edit</button>
                 <% } else { %>
-                 <button class="btn-odd" type="">Edit</button>
+                 <button onClick="showModal(<%= JSON.stringify(users) %>,<%=i%>)" class="btn-odd" type="">Edit</button>
             <% } %>
             </td>
                 
@@ -74,7 +78,6 @@
 </table>
 
     <div class="paging">
-
 
         
         <% if (pageData.prev) { %>
@@ -88,7 +91,91 @@
         
 
     </div>
-</form>
+
 </div>
+
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+
+
+        <h1 id="modal-fullname"></h1>
+        
+        <input id="userID" name="userID" value="">
+        
+        <h2>Change Role</h2>
+        <select name="roleUpdateOption">
+
+            <% for(role in userRoles) { %>
+                <h2><%= userRoles[role] %></h2>
+                    
+                    <option value="<%= userRoles[role] %>"><%= userRoles[role] %></option>
+
+            <% } %>
+        </select>
+
+        <h2>Change status</h2>
+        <select name="statusUpdateOption">
+            <% for(staus in userStats) { %>
+                <h2><%= userStats[staus] %></h2>
+                    
+                    <option value="<%= userStats[staus] %>"><%= userStats[staus] %></option>
+                    
+            <% } %>
+            </select>
+        <br>
+        <button value="delete" name="btnEdit" type="submit">Delete User</button>
+        <button value="edit" name="btnEdit" type="submit">Update User</button>
+
+
+
+  </div>
+
+</div>
+</form>
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementsByClassName("btn-edit");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  console.log('ok')
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+    function showModal(user,index) {
+
+        modal.style.display = "block";
+        
+        document.getElementById("modal-fullname").innerHTML = user[index].firstName + " " + user[index].lastName
+        document.getElementById("userID").value = user[index].userID
+
+    }
+
+</script>
 
 

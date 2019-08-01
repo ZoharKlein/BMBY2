@@ -76,8 +76,10 @@ VALUES
 
 //update
 exports.updateProfileImgByID = (imgURL,userID) => {return `UPDATE users SET profileImg = "${imgURL}" WHERE userID = ${userID}`}
+exports.updateRoleAnStausByID = (role,status,userID) => {return `UPDATE users SET role = "${role}",status = "${status}" WHERE userID = ${userID}`}
 
-
+//delete
+exports.deleteUserByID = (userID) => {return `DELETE FROM users WHERE userID = ${userID}`}
 
 //limit
 exports.limitFromStartToEnd = (start,end) => {return `LIMIT ${start},${end}`}

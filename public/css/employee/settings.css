@@ -5,7 +5,7 @@
 
 .menu-collapse {
     margin: 0 auto;
-    width: 50%;
+    width: 70%;
     text-align: center;
 }
 .collapsible {
@@ -62,5 +62,14 @@
     background-color: #39ae4a;
     border: 1px solid #e9e5dd;
     color: #e9e5dd;
+
+
+}
+
+@media only screen and (max-width: 600px) {
+    .menu-collapse {
+        width: 95%;
+    }
+
 
 }
