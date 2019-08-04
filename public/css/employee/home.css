@@ -1,0 +1,45 @@
+.home img {
+    height: 100px;
+    width: 100px;
+    border-radius: 10%;
+    transition: transform 0.2s;
+    display: grid;
+}
+.home img:hover{
+    transform: scale(1.5);
+
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 5px;
+    background-color: #eeb310;
+    padding: 10px;
+    width: 60%;
+    margin: 0 auto;
+
+  }
+  
+  .grid-container div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+
+  }
+
+  .grid-container img {
+    display: flex;
+    float: left;
+  }
+
+  
+  @media only screen and (max-width: 600px) {
+
+    .grid-container {
+
+        width: 100%;
+    
+      }
+    }

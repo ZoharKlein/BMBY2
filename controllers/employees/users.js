@@ -27,10 +27,10 @@ exports.postUsers = (req, res, next) => {
     const role = req.body.roleUpdateOption
 
 
+    console.log(req.body)
 
     if (req.body.btnEdit === "edit") {
         
-
 
         mysql.EnterQuery(mysql.updateRoleAnStausByID(role,status,userID))
         .then(result => {

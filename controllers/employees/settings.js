@@ -29,11 +29,15 @@ exports.postSettings = (req, res, next) => {
             else {
                 mysql.EnterQuery(mysql.updateProfileImgByID(imgURL,global.loginEmployee.userID))
                 .then(result => 
-                    res.render('employees/dashboard',{
-                        user : global.loginEmployee,
-                        userMenu: User.selectMenuByRole(global.loginEmployee.role),
-                        content: "Settings"
-                      })
+
+                    setTimeout(() => {
+                        res.render('employees/dashboard',{
+                            user : global.loginEmployee,
+                            userMenu: User.selectMenuByRole(global.loginEmployee.role),
+                            content: "Settings"
+                          })
+                    }, 1500)
+
                 )
                 .catch(err => { console.log(err) })
                 
@@ -49,15 +53,16 @@ exports.postSettings = (req, res, next) => {
             break;
         }
         default : {
+            res.render('employees/dashboard',{
+                user : global.loginEmployee,
+                userMenu: User.selectMenuByRole(global.loginEmployee.role),
+                content: "Settings"
+              })
             break;
         }
     }
 
-    res.render('employees/dashboard',{
-        user : global.loginEmployee,
-        userMenu: User.selectMenuByRole(global.loginEmployee.role),
-        content: "Settings"
-      })
+
 
 }
 

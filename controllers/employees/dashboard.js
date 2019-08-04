@@ -14,7 +14,14 @@ exports.getDashboard = (req, res, next) => {
 
     res.render('employees/dashboard',{
         user : global.loginEmployee,
-        userMenu: menu
+        userMenu: menu,
+        content: "Home"
       })
+
+}
+
+exports.getDashboardHome = (req, res, next) => {
+ 
+    res.redirect('/employees/dashboard')
 
 }

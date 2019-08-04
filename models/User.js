@@ -44,7 +44,7 @@ module.exports.selectMenuByRole = (role) => {
 
     switch(role){
         case 'super administrator': {
-            return superAdmin
+            return sumperAdminMenuWithImg
             break
         }
         case 'administrator': {
@@ -65,16 +65,15 @@ module.exports.selectMenuByRole = (role) => {
 
 }
 
-const superAdmin = ['Dashboard','Leads','Users','Reports','Settings','Logout']
-const admin = ['Dashboard','Leads','Reports','Settings','Logout']
-const worker = ['Dashboard','Leads','Settings','Logout']
+const superAdmin = ['Home','Leads','Users','Reports','Settings','Logout']
+const admin = ['Home','Leads','Reports','Settings','Logout']
+const worker = ['Home','Leads','Settings','Logout']
 
-exports.allMenuItems = {
-    dashboard: 'Dashboard',
-    leads: 'Leads',
-    users: 'Users',
-    reports: 'Reports',
-    settings: 'Settings',
-    logout: 'Logout'
+const sumperAdminMenuWithImg = [ 
+    {title: 'Home', imgURL: 'https://image.flaticon.com/icons/svg/609/609803.svg'} ,
+    {title: 'Leads', imgURL: 'https://image.flaticon.com/icons/svg/1979/1979367.svg'} ,
+    {title: 'Users', imgURL: 'https://www.flaticon.com/premium-icon/icons/svg/1165/1165725.svg'} ,
+    {title: 'Reports', imgURL: 'https://image.flaticon.com/icons/svg/858/858699.svg'} ,
+    {title: 'Settings', imgURL: 'https://image.flaticon.com/icons/svg/1055/1055683.svg'}
+]
 
-}

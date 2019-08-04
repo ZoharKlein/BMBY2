@@ -11,6 +11,8 @@ const settingsController = require('../controllers/employees/settings')
 router.route('/')
 .get(dashboardController.getDashboard)
 
+router.route('/home')
+.get(dashboardController.getDashboardHome)
 
 router.route('/users')
 .get(usersController.getUsers)
@@ -19,6 +21,7 @@ router.route('/users')
 router.route('/settings')
 .get(settingsController.getSettings)
 .post(settingsController.postSettings)
+
 
 
 

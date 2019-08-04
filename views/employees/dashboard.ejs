@@ -23,6 +23,7 @@
   <link href="/css/modal.css" rel="stylesheet">
   <link href="/css/employee/users.css" rel="stylesheet">
   <link href="/css/employee/settings.css" rel="stylesheet">
+    <link href="/css/employee/home.css" rel="stylesheet">
 
   
 
@@ -96,7 +97,7 @@
 
         <% for(i = 0; i < userMenu.length; i++) { %> 
 
-            <a href="/employees/dashboard/<%=userMenu[i].toLowerCase()%>" class="list-group-item list-group-item-action bg-light"><%=userMenu[i]%></a>
+            <a href="/employees/dashboard/<%=userMenu[i].title.toLowerCase()%>" class="list-group-item list-group-item-action bg-light"><%=userMenu[i].title%></a>
           
  
         <% } %>
@@ -118,10 +119,15 @@
 
         <% if (typeof content !== 'undefined') {%>
 
-            <%  if (content === 'Users') { %>
+            <% if (content === 'Home') {%>
 
+              <%-include("employess-partials/home") -%>
+
+
+            <%  } else if (content === 'Users') { %>
 
                 <%-include("employess-partials/users") -%>
+
 
             <% } else if (content === 'Settings') {%>
 

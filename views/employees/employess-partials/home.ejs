@@ -1,0 +1,18 @@
+<div class="home">
+    <h1><%= content %></h1>
+
+    <div class="grid-container">
+        
+
+            <% for(i = 0; i < userMenu.length; i++) { %> 
+
+            
+            <a href="/employees/dashboard/<%=userMenu[i].title.toLowerCase()%>" class="list-group-item list-group-item-action bg-light"><img src="<%=userMenu[i].imgURL%>" alt="<%=userMenu[i].title%>"><%=userMenu[i].title%></a>
+          
+ 
+        <% } %>
+
+    </div>
+</div>
+
+
