@@ -21,6 +21,7 @@ exports.postSettings = (req, res, next) => {
     const option = req.body.update
     console.log(option)
     console.log(req.body)
+    const errMsg = []
 
     switch (option) {
         case 'img': {
@@ -31,15 +32,7 @@ exports.postSettings = (req, res, next) => {
             else {
                 mysql.EnterQuery(mysql.updateProfileImgByID(imgURL,global.loginEmployee.userID))
                 .then(result => 
-
-                    setTimeout(() => {
-                        res.render('employees/dashboard',{
-                            user : global.loginEmployee,
-                            userMenu: User.selectMenuByRole(global.loginEmployee.role),
-                            content: "Settings"
-                          })
-                    }, 1500)
-
+                    global.loginEmployee.profileImg = imgURL
                 )
                 .catch(err => { console.log(err) })
                 
@@ -47,13 +40,27 @@ exports.postSettings = (req, res, next) => {
             break;
         }
         case 'details': {
+            errMsg.push(updateUserValid(req.body))
+            console.log(errMsg)
+            if (errMsg[0] === undefined) {
+                //update sql
+                mysql.EnterQuery(mysql.updateDetailes(req.body.firstName,req.body.lastName,
+                    req.body.city,req.body.email,req.body.mobile,global.loginEmployee.userID))
+                    .then(result => {
+                        global.loginEmployee.firstName = req.body.firstName
+                        global.loginEmployee.lastName = req.body.lastName
+                        global.loginEmployee.email = req.body.email
+                        global.loginEmployee.mobile = req.body.mobile
+                        global.loginEmployee.city = req.body.city
+                         errMsg.push('Details Updated.')})
+                    .catch(err => { console.log(err)})
+            }
   
             
             break;
         }
         case 'password': {
             
-            const errMsg = []
             
              if (req.body.password === req.body.passwordVerify) {
                 
@@ -77,9 +84,9 @@ exports.postSettings = (req, res, next) => {
                               else {
                                   //enter to db
                                   errMsg.push(passwordValid(req.body.password))
-                                //   console.log(errMsg)
+                                  console.log(errMsg)
 
-                                  if (errMsg.length[0] === undefined) {
+                                  if (errMsg[0] === undefined) {
                                     
                                       //update password
                                       bcryptjs.hash(req.body.password, global.config.get('Dev.bycriptjs').salt , (hashErr, hash) => {
@@ -119,10 +126,7 @@ exports.postSettings = (req, res, next) => {
                 console.log('not same password')
             }
 
-            setTimeout(() => {
-                console.log(errMsg)
-                renderSettings(res,errMsg)
-            }, 1000);
+
             
             break;
         }
@@ -134,7 +138,12 @@ exports.postSettings = (req, res, next) => {
               })
             break;
         }
+
     }
+    setTimeout(() => {
+        console.log(errMsg)
+        renderSettings(res,errMsg)
+    }, 1000);
 
 }
 

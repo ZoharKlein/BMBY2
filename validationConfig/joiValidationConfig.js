@@ -128,8 +128,8 @@ module.exports.updateUserValid = (...parms) => {
     //console.log(user)
 
     Joi.validate({
-        firstname: user.firstname,
-        lastname: user.lastname,
+        firstname: user.firstName,
+        lastname: user.lastName,
         city: user.city,
         mobile: user.mobile,
         email: user.email,   
@@ -147,12 +147,15 @@ module.exports.updateUserValid = (...parms) => {
                 msg: element.message,
                 key: element.path[0]
             }
-            errArr.push(errObject)
+            errArr.push(element.message)
         }
         
         })
         
 }})
+if (errArr.length === 0) {
+    errArr = undefined
+}
 console.log(errArr)
 return errArr
 }
