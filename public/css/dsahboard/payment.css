@@ -1,0 +1,15 @@
+.payment-logo-img {
+    height: 70px;
+    width: 70px;
+    border-radius: 100px 
+}
+
+.payment-radio-container {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.payment-radio-container input {
+    margin: 10px;
+}

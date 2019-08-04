@@ -33,7 +33,12 @@
 
     .grid-container {
 
-        width: 100%;
+        width: 95%;
+        grid-template-columns: auto auto;
     
+      }
+      .home img {
+        height: 30px;
+        width: 30px;
       }
     }

@@ -1,0 +1,40 @@
+<%-include("dashboard-partials/dashboard-headr") -%>
+
+
+<div class="payment">
+
+    <div class="payment-radio-container">
+    <h2>Choser your credit company</h2>
+    <% for(i = 0; i < paymentCompany.length; i++) { %>
+
+
+        <input type="radio" name="company" value="<%= paymentCompany[i].name %>"><img class="payment-logo-img" src="<%= paymentCompany[i].logoURL %>" alt="">
+
+
+    <% } %>
+
+
+    </div>
+
+    <input placeholder="Full Name on a card" type="" name="" value="">
+    <br>
+    <input placeholder="Card number" type="" name="" value="" maxlength= "4"> - 
+    <input placeholder="Card number" type="" name="" value="" maxlength= "4"> - 
+    <input placeholder="Card number" type="" name="" value="" maxlength= "4"> - 
+    <input placeholder="Card number" type="" name="" value="" maxlength= "4">
+
+    <br>
+    <input placeholder="CVV2/CVC2" type="" name="" value="" maxlength= "3">
+    <br>
+    <input id="datepicker" placeholder="Expiration date" type="date" data-date-format="MMMM YYYY">
+
+    <br>
+    <h2><%= lane.price %> <%= lane.coin %> </h2>
+
+    <form action="" method="post">
+        <button type="submit">Pay</button>
+    </form>
+
+</script>
+
+</div>    

@@ -21,10 +21,8 @@
                     </ul>
 
                 <% } %>
-                <form action="/dashboard/buy" methood>
-                    <label name="lane" value="<%=laneMenu[i].timeLength%>">
-                    <button type="submit" class="btn btn-block btn-primary text-uppercase">Buy</button>
-                
+                <form action="/dashboard/payment" method="post">
+                  <button name="lane" value="<%=laneMenu[i].timeLength%>" type="submit" class="btn btn-block btn-primary text-uppercase">Buy</button>
                 </form>
             
             </div>

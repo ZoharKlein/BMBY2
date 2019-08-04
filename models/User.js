@@ -28,9 +28,9 @@ module.exports = class User {
 
 }
 module.exports.userRole = {
-    SUPER_ADMINISTRATOR: "super administrator",
+    WORKER: "worker",
     ADMINISTRATOR: "administrator",
-    WORKER: "worker"
+    SUPER_ADMINISTRATOR: "super administrator",
 }
 
 

@@ -6,10 +6,11 @@ const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const config = require('config');
 
+const jwt = require('jsonwebtoken')
+
 global.config = config
 
 ///Routers
-
 const leadAPI = require('./routers/LeadApi/leadAPI')
 
 
@@ -43,7 +44,7 @@ app.use(session({
     saveUninitialized: false,
     secret: "zohar", 
     cookie: { 
-        maxAge: 1000 * 60 * 24 * 7,//week
+        maxAge: 1000 * 60 * 60 * 24 * 7,//week
         sameSite: true,
         saveUninitialized: false,
         resave: false
