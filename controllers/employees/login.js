@@ -1,5 +1,5 @@
 const mysql = require('../../db/mysql')
-const bcryptjs = require('bcryptjs');
+const bcryptjs = require('bcryptjs')
 
 exports.getLogin = (req, res, next) => {
 

@@ -1,7 +1,8 @@
 const mysql = require('../../db/mysql')
-const userValid = require('../../validationConfig/joiValidationConfig').userValid
+const updateUserValid = require('../../validationConfig/joiValidationConfig').updateUserValid
+const passwordValid = require('../../validationConfig/joiValidationConfig').passwordValid
 const User = require('../../models/User')
-const bycriptjs = require('bcryptjs')
+const bcryptjs = require('bcryptjs')
 
 
 
@@ -19,6 +20,7 @@ exports.postSettings = (req, res, next) => {
 
     const option = req.body.update
     console.log(option)
+    console.log(req.body)
 
     switch (option) {
         case 'img': {
@@ -45,10 +47,82 @@ exports.postSettings = (req, res, next) => {
             break;
         }
         case 'details': {
+  
             
             break;
         }
         case 'password': {
+            
+            const errMsg = []
+            
+             if (req.body.password === req.body.passwordVerify) {
+                
+                // if password are true update
+                bcryptjs.compare(req.body.oldPassword,global.loginEmployee.password , (err, isMatch) => {
+                    if (err) {
+
+                    } else {
+                      if (isMatch) {
+
+                        bcryptjs.compare(req.body.password, global.loginEmployee.password , (err, isMatch) => {
+                            if (err) {
+
+                            } else {
+                              if (isMatch) {
+                                  //error must be a new password
+                                  errMsg.push('Must be a new password!')
+                                //   console.log('must be a new password')
+
+                              }
+                              else {
+                                  //enter to db
+                                  errMsg.push(passwordValid(req.body.password))
+                                //   console.log(errMsg)
+
+                                  if (errMsg.length[0] === undefined) {
+                                    
+                                      //update password
+                                      bcryptjs.hash(req.body.password, global.config.get('Dev.bycriptjs').salt , (hashErr, hash) => {
+                                    
+                                        if (hashErr) {
+                                        console.log(hashErr)
+                                        }
+                                        else {
+                                            mysql.EnterQuery(mysql.updatePasswordByID(hash,global.loginEmployee.userID))
+                                            .then(res=> {
+                                                errMsg.push('Update new password fine.')
+                                            } )
+                                            .catch(errsql => { console.log(errsql )})
+                                            // console.log('new password in db')
+
+                                        }
+                                    
+                                        })
+
+                                  }
+                              }
+                      }})
+
+                      } else {
+                        // else output old password incorrect
+                        errMsg.push('Old password incorrect!')
+                        // console.log('old password incorrect')
+                      }
+                    }
+                
+                })
+
+
+            } else {
+                ///output not same new password
+                errMsg.push('Not same passwords!')
+                console.log('not same password')
+            }
+
+            setTimeout(() => {
+                console.log(errMsg)
+                renderSettings(res,errMsg)
+            }, 1000);
             
             break;
         }
@@ -62,7 +136,15 @@ exports.postSettings = (req, res, next) => {
         }
     }
 
-
-
 }
+
+const renderSettings = (res, errMsg = undefined) => {
+    res.render('employees/dashboard',{
+        user : global.loginEmployee,
+        userMenu: User.selectMenuByRole(global.loginEmployee.role),
+        content: "Settings",
+        updateErr: errMsg
+      })
+
+} 
 

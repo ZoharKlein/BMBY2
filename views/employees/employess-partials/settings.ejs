@@ -4,6 +4,17 @@
 
 
     <div class="menu-collapse">
+
+
+        <% if (typeof updateErr !== 'undefined') {%>
+            <% for (i = 0; i < updateErr.length; i++) { %>
+                
+                <label for=""><%= updateErr[i] %></label>
+                <br>
+    
+            <%}%>
+         <br>
+        <%}%>
         
         <button class="collapsible"><i class="fas fa-user-circle"> Change profile image</i></button>
         <div class="content">

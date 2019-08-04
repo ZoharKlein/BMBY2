@@ -76,6 +76,7 @@ VALUES
 
 //update
 exports.updateProfileImgByID = (imgURL,userID) => {return `UPDATE users SET profileImg = "${imgURL}" WHERE userID = ${userID}`}
+exports.updatePasswordByID = (password,userID) => {return `UPDATE users SET password = "${password}",lastPasswordUpdate = CURDATE() WHERE userID = ${userID}`}
 exports.updateRoleAnStausByID = (role,status,userID) => {return `UPDATE users SET role = "${role}",status = "${status}" WHERE userID = ${userID}`}
 
 //delete

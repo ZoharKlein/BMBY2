@@ -50,8 +50,6 @@ const customerSchema = Joi.object().keys({
 })
 
 
-
-
 module.exports.customerValid = (...parms) => {
     
     const customer = parms[0]
@@ -90,7 +88,7 @@ module.exports.userValid = (...parms) => {
     
     const user = parms[0]
     let errArr = []
-    console.log(user)
+    //console.log(user)
 
     Joi.validate({
         firstname: user.firstname,
@@ -98,8 +96,43 @@ module.exports.userValid = (...parms) => {
         city: user.city,
         mobile: user.mobile,
         email: user.email,
-        password: user.password
+        password: user.password    
+        
+    }, userSchema, {abortEarly: false} ,(err, value) => {
+
+    if (err) {
+        //console.log(err)
+        let i = 0
+        err.details.forEach(element => { 
+
+            if (i % 2 === 0) {
+
+            errObject = {
+                msg: element.message,
+                key: element.path[0]
+            }
+            errArr.push(errObject)
+        }
+        
+        })
+        
+}})
+console.log(errArr)
+return errArr
+}
+
+module.exports.updateUserValid = (...parms) => {
     
+    const user = parms[0]
+    let errArr = []
+    //console.log(user)
+
+    Joi.validate({
+        firstname: user.firstname,
+        lastname: user.lastname,
+        city: user.city,
+        mobile: user.mobile,
+        email: user.email,   
         
     }, userSchema, {abortEarly: false} ,(err, value) => {
 
@@ -126,6 +159,28 @@ return errArr
 
 
 
+module.exports.passwordValid = (password) => {
+    
+    let errArr
+    //console.log(user)
+
+    Joi.validate({
+    password: password 
+        
+    }, userSchema, {abortEarly: false} ,(err, value) => {
+
+    if (err) {
+        //console.log(err)
+        errArr = err
+        console.log(errArr)
+        return errArr.details[0].message
+        
+        }
+    }) 
+        
+
+
+}
 
 /** lead fields
  * 
