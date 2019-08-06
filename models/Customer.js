@@ -10,6 +10,7 @@ module.exports = class Customer {
             companyName: data.companyName, 
             email: data.email,
             password: data.password,
+            expDate: new Date(),
             lane: 'None'
         })
         

@@ -9,6 +9,7 @@ const customerSchema = new mongoose.Schema({
     companyName:{ type : String , unique : true, required : true}, 
     email: { type : String , unique : true, required : true},
     password: { type : String , sparse : true, required : true},
+    expDate: Date,
     facebookID: String,
     googleID:String,
     lane : String
@@ -26,7 +27,6 @@ const leadSchema = new mongoose.Schema({
     msg: { type : String , sparse : true, required : true},
     cid: { type : Number , sparse : true, required : true},
     date: {type : Date , sparse : true, required : true},
-
 
 })
 
@@ -46,5 +46,21 @@ const leadProcessSchema = new mongoose.Schema({
 
 
 exports.LeadProcess = new mongoose.model('LeadProcess', leadProcessSchema)
+
+const paymentSchema = new mongoose.Schema({
+    user_id: {type : String , sparse : true, required : true , ref: 'Coustomer'} ,
+    fullName: {type : String , sparse : true, required : true},
+    cardNumber:{type : String , sparse : true, required : true},
+    expDate:{type : Date , sparse : true, required : true},
+    amount:{ type : String , sparse : true, required : true},
+    coin: {type : String , sparse : true, required : true},
+    date: {type : Date , sparse : true, required : true},
+})
+
+
+exports.Payment = new mongoose.model('Payment', paymentSchema)
+
+exports.ObjectId = mongoose.Types.ObjectId
+
 
 exports.ObjectId = mongoose.Types.ObjectId

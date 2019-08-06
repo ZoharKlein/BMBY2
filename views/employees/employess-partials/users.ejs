@@ -36,10 +36,10 @@
             <tr>
                 <td>First Name</td>
                 <td>Last Name</td>
-                <td>Email</td>
-                <td>Mobile</td>
-                <td>Status</td>
-                <td>Role</td>
+                <td class="dasboard-table-phne-off">Email</td>
+                <td class="dasboard-table-phne-off">Mobile</td>
+                <td class="dasboard-table-phne-off">Status</td>
+                <td class="dasboard-table-phne-off">Role</td>
                 <td></td>        
             </tr>  
 
@@ -57,10 +57,10 @@
  
                 <td><%= users[i].firstName %></td>
                 <td><%= users[i].lastName %></td>
-                <td><%= users[i].email %></td>
-                <td><%= users[i].mobile %></td>
-                <td><%= users[i].status %></td>
-                <td><%= users[i].role %></td>
+                <td class="dasboard-table-phne-off" ><%= users[i].email %></td>
+                <td class="dasboard-table-phne-off" ><%= users[i].mobile %></td>
+                <td class="dasboard-table-phne-off" ><%= users[i].status %></td>
+                <td class="dasboard-table-phne-off" ><%= users[i].role %></td>
                 <td>
 
                 <% if (i % 2 === 0) { %>
@@ -106,7 +106,7 @@
 
         <h1 id="modal-fullname"></h1>
         
-        <input id="userID" name="userID" value="">
+        <input type="hidden" id="userID" name="userID" value="">
         
         <h2>Change Role</h2>
         <select name="roleUpdateOption">

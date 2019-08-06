@@ -3,38 +3,44 @@
 
 <div class="payment">
 
+    <form name="paymentForm" action="/dashboard/payment" method="post" onsubmit="return validateForm()" >
+
     <div class="payment-radio-container">
     <h2>Choser your credit company</h2>
     <% for(i = 0; i < paymentCompany.length; i++) { %>
 
 
-        <input type="radio" name="company" value="<%= paymentCompany[i].name %>"><img class="payment-logo-img" src="<%= paymentCompany[i].logoURL %>" alt="">
+        <input required type="radio" name="company" value="<%= paymentCompany[i].name %>"><img class="payment-logo-img" src="<%= paymentCompany[i].logoURL %>" alt="">
 
 
     <% } %>
 
 
     </div>
+    <div class="payment-data">
+    
+        <input placeholder="Full Name on a card" type="" name="" value=""required>
+        <br>
+        <input placeholder="Card number" type="text" name="cardNumber" value="" minlength="4" maxlength= "4" required> - 
+        <input placeholder="Card number" type="text" name="cardNumber" value="" minlength="4" maxlength= "4" required> - 
+        <input placeholder="Card number" type="text" name="cardNumber" value="" minlength="4" maxlength= "4" required> - 
+        <input placeholder="Card number" type="text" name="cardNumber" value="" minlength="2" maxlength= "4" required>
+    
+        <br>
+        <input placeholder="CVV2/CVC2" type="text" name="cvv" value="" minlength="3" maxlength= "3"required>
+        <br>
+        <h3>Expiration date</h3>
+        <input placeholder="Month" type="number" name="expDate" min="1" max="12"required>
+        <input placeholder="Year" type="number" name="expDate" min="<%= new Date().getFullYear() %>" max="<%= new Date().getFullYear() + 5 %>"required>
 
-    <input placeholder="Full Name on a card" type="" name="" value="">
-    <br>
-    <input placeholder="Card number" type="" name="" value="" maxlength= "4"> - 
-    <input placeholder="Card number" type="" name="" value="" maxlength= "4"> - 
-    <input placeholder="Card number" type="" name="" value="" maxlength= "4"> - 
-    <input placeholder="Card number" type="" name="" value="" maxlength= "4">
-
-    <br>
-    <input placeholder="CVV2/CVC2" type="" name="" value="" maxlength= "3">
-    <br>
-    <input id="datepicker" placeholder="Expiration date" type="date" data-date-format="MMMM YYYY">
-
+    </div>
     <br>
     <h2><%= lane.price %> <%= lane.coin %> </h2>
-
-    <form action="" method="post">
-        <button type="submit">Pay</button>
+        <input type="hidden" name="lane" value="<%= lane.timeLength %>">
+        <input type="hidden" name="pay" value="<%= lane.coin %>">
+        <button name="pay" value="<%= lane.price %>" type="submit">Pay</button>
     </form>
 
-</script>
+
 
 </div>    

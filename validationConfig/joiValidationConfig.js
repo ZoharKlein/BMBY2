@@ -12,9 +12,9 @@ const joiValDef = {
     email_standard: Joi.string().email({ minDomainSegments: 2 }),
     password_leterAndNumberMost_8To30: Joi.string().regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,30}$/),
     digit1To100: Joi.number().min(1).max(100),
+    digit14to16: Joi.number().min(00000000000000).max(9999999999999999),
+    digit3: Joi.number().min(000).max(999),
 }
-
-
 
 const userSchema = Joi.object().keys({
     firstname: joiValDef.bigLetterFirst_aToz_2To20.error(() => 'First name must have only letters!'),
@@ -40,7 +40,6 @@ const leadSchema = Joi.object().keys({
 
 })
 
-
 const customerSchema = Joi.object().keys({
     companyName: joiValDef.bigLetterFirst_aToz_2To20.error(() => 'Company name must have only letters'),
     email: joiValDef.email_standard.error(() => 'Example : email@company.com '),
@@ -49,6 +48,12 @@ const customerSchema = Joi.object().keys({
 
 })
 
+const paymentSchema = Joi.object().keys({
+    fullName: joiValDef.bigLetterFirst_aToz_2To20.error(() => 'Name must have only letters'),
+    cardNumber: joiValDef.digit14to16.error(() => 'Incorrect card number only numbers'),
+    cvv: joiValDef.digit3.error(() => 'Must be 3 digit'),
+
+})
 
 module.exports.customerValid = (...parms) => {
     
@@ -160,8 +165,6 @@ console.log(errArr)
 return errArr
 }
 
-
-
 module.exports.passwordValid = (password) => {
     
     let errArr
@@ -183,6 +186,42 @@ module.exports.passwordValid = (password) => {
         
 
 
+}
+
+module.exports.paymentValid = (...parms) => {
+    
+    const paymentValid = parms[0]
+    let errArr = []
+
+    Joi.validate({
+        fullName: paymentValid.fullName,
+        cardNumber: (paymentValid.cardNumber.join("")),
+        cvv: (paymentValid.cvv)
+        
+    }, paymentSchema, {abortEarly: false} ,(err, value) => {
+
+    if (err) {
+        //console.log(err)
+        let i = 0
+        err.details.forEach(element => { 
+            console.log(element)
+            
+            if (i % 2 === 0) {
+
+            errObject = {
+                msg: element.message,
+                key: element.path[0]
+            }
+            //console.log(errObject)
+            errArr.push(errObject)
+            
+        }
+        
+        })
+        
+    }})
+   // console.log(errArr)
+    return errArr
 }
 
 /** lead fields
