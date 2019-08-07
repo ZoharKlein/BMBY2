@@ -5,6 +5,8 @@ const router = express.Router();
 const dashboardController = require('../controllers/dashboard/dashboard')
 const logoutController = require('../controllers/dashboard/logut')
 const paymentController = require('../controllers/dashboard/payment')
+const accountController = require('../controllers/dashboard/account')
+const leadsController = require('../controllers/dashboard/leads')
 
 /* Dashboard */
 router.route('/')
@@ -15,6 +17,13 @@ router.route('/logut')
 
 router.route('/payment')
 .post(paymentController.postPayment)
+
+router.route('/account').
+get(accountController.getAccount)
+
+router.route('/leads')
+.get(leadsController.getLeads)
+.post(leadsController.postLeads)
 
 
 module.exports = router

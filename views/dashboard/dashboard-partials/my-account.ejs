@@ -1,0 +1,38 @@
+<h1><%= content %></h1>
+
+    <table>
+        
+        <tr>
+
+            <td>Company Name</td> <td> <%= customer.companyName%> </td>
+        
+        </tr>
+        
+
+        <tr>
+        
+                <td>Email</td> <td> <%= customer.email%> </td>
+
+        </tr>
+
+        <tr>
+        
+                <td>Expiry Date</td> <td> <%= `${customer.expDate.getDate()} - ${customer.expDate.getMonth() + 1} - ${customer.expDate.getFullYear()} ` %> </td>
+
+        </tr>
+
+        <tr>
+        
+                <td>Days To Expire</td> <td> <%=  daysLeft %> </td>
+
+        </tr>
+
+
+    </table>
+
+    <% if (daysLeft < 30 ) { %>
+        <form>
+            <button type="submit">Renew</button>
+        </form>
+
+    <% } %> 

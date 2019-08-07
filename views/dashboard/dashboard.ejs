@@ -7,17 +7,61 @@
 
     <% if (typeof customer !== 'undefined') { %>
         <div="dashboard">
-            <h1>Hello <%= customer.companyName %></h1>
+       
 
                     <% if (customer.lane === 'None') { %>
-                            
+                            <h1>Hello <%= customer.companyName %></h1>
                             <%-include("dashboard-partials/price-menu") -%>
+                            
+                            <form action="/dashboard/logut" method="post">
+                            
+                                <button type="submit">Logut</button>
+                            
+                            </form>
 
-                    <% } %>
+                    <% } else { %>
 
-            <form action="/dashboard/logut" method="post">
-                <button type="submit">Logut</button>
-            </form>
+                    <div class="navbar">
+
+
+                        <nav>
+                            <a href="/dashboard">Home</a>
+                            <a href="/dashboard/leads">My Leads</a>
+                            <a href="/dashboard/account">My Account</a>
+                        </nav>
+
+
+
+                      <div class="navbar-user">
+                        <h1>Hello <%= customer.companyName %></h1>
+                        <br>
+                        <form action="/dashboard/logut" method="post">
+                            <button type="submit">Logut</button>
+                        </form>
+                    </div>
+                    </div>
+
+
+
+
+                    <% if (content === "Home") { %> 
+
+                         <h1><%= content %></h1> 
+
+
+                    <% } else if (content === "My Account") { %>
+  
+                        <%-include("dashboard-partials/my-account") -%>
+
+                    <% } else if (content === "My Leads") { %>
+  
+                                     <%-include("dashboard-partials/leads") -%>
+
+                    <% } %>%>
+
+                <% } %>
+
+
         
         </div>
 

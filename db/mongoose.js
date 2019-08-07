@@ -25,7 +25,7 @@ const leadSchema = new mongoose.Schema({
     city: { type : String , sparse : true, required : true},
     title:{ type : String , sparse : true, required : true},
     msg: { type : String , sparse : true, required : true},
-    cid: { type : Number , sparse : true, required : true},
+    cid: { type : String , sparse : true, required : true},
     date: {type : Date , sparse : true, required : true},
 
 })
@@ -39,7 +39,7 @@ mongoose.Collection.dropIndexes
 const leadProcessSchema = new mongoose.Schema({
     lead_id: { type : mongoose.Schema.Types.ObjectId , sparse : true, required : true , ref: 'Lead' },
     user_id: {type : Number , sparse : true, required : true} ,
-    now_status: {type : String , sparse : true, required : true},
+    status: {type : String , sparse : true, required : true},
     last_date_modified: {type : Date , sparse : true, required : true},
 
 })

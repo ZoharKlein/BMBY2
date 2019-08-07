@@ -14,6 +14,7 @@ const joiValDef = {
     digit1To100: Joi.number().min(1).max(100),
     digit14to16: Joi.number().min(00000000000000).max(9999999999999999),
     digit3: Joi.number().min(000).max(999),
+    normalString: Joi.string()
 }
 
 const userSchema = Joi.object().keys({
@@ -33,7 +34,7 @@ const leadSchema = Joi.object().keys({
     city: joiValDef.bigLetterFirst_aToz_2To30,
     mobile: joiValDef.phone_plusAnd1To3Prefix_9dgigit,
     email: joiValDef.email_standard,
-    cid: joiValDef.digit1To100,
+    cid: joiValDef.normalString,
     title: joiValDef.text_10To50,
     msg: joiValDef.text_20To4000,
 
@@ -222,6 +223,46 @@ module.exports.paymentValid = (...parms) => {
     }})
    // console.log(errArr)
     return errArr
+}
+
+
+module.exports.leadValid = (...parms) => {
+    
+    const lead = parms[0]
+    let errArr = []
+
+    Joi.validate({
+        firstname: lead.firstname,
+        lastname: lead.lastname,
+        email: lead.email,
+        mobile: lead.mobile,
+        city: lead.city,
+        cid: lead.cid,
+        msg: lead.msg,
+        title: lead.title
+        
+    }, leadSchema, {abortEarly: false} ,(err, value) => {
+
+    if (err) {
+        console.log(err)
+        let i = 0
+        err.details.forEach(element => { 
+
+            if (i % 2 === 0) {
+
+            errObject = {
+                msg: element.message,
+                key: element.path[0]
+            }
+            errArr.push(errObject)
+            
+        }
+        
+        })
+        
+}})
+console.log(errArr)
+return errArr
 }
 
 /** lead fields

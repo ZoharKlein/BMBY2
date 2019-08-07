@@ -80,6 +80,8 @@ app.use('/dashboard/',dashboardRouter)
  */
 app.use('/employees/',employeesRouter)
 
+///////////////////// API TO SEND LEAD /////////////////////
+app.use('/api',leadAPI)
 
 
 
@@ -175,8 +177,6 @@ app.use(errorController.get404);
 
 
 
-///////////////////// API TO SEND LEAD /////////////////////
-app.use('/api/lead',leadAPI)
 
     
 ///////////////////// dashboard /////////////////////
@@ -188,7 +188,7 @@ app.post('/dashboard/Leads', (req,res)=>{
     console.log('OK')
     res.send('OK')
 })*/
-/
+
 
 
 

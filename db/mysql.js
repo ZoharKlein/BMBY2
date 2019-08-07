@@ -31,6 +31,7 @@ exports.InsertDataFromMySQL = async(sqlCommand) => {
 
 }
 //select
+exports.findAllUsersId = 'SELECT userID FROM users'
 exports.findAllUsersExeptOne = userID => {return `SELECT * FROM users WHERE NOT userID = '${userID}'`}
 exports.findUserByMail = email => {return `SELECT * FROM users WHERE email = '${email}'`}
 exports.findUserByMailAndPassword = (email,password) => {return `SELECT * FROM users WHERE email = '${email}' AND 'password' = '${password}'`}
@@ -84,6 +85,7 @@ exports.updateDetailes = (firstname,lastname,city,email,mobile,userID) => {retur
 exports.deleteUserByID = (userID) => {return `DELETE FROM users WHERE userID = ${userID}`}
 
 //limit
+exports.limitNumberOfResult = (limit) => {return `LIMIT ${limit}`}
 exports.limitFromStartToEnd = (start,end) => {return `LIMIT ${start},${end}`}
 
 //orders
