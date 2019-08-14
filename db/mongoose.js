@@ -26,6 +26,8 @@ const leadSchema = new mongoose.Schema({
     title:{ type : String , sparse : true, required : true},
     msg: { type : String , sparse : true, required : true},
     cid: { type : String , sparse : true, required : true},
+    userID: { type : Number , sparse : true, required : true},
+    now_status: {type : String , sparse : true, required : true},
     date: {type : Date , sparse : true, required : true},
 
 })

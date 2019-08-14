@@ -5,6 +5,8 @@ const router = express.Router();
 const dashboardController = require('../controllers/employees/dashboard')
 const usersController = require('../controllers/employees/users')
 const settingsController = require('../controllers/employees/settings')
+const leadsController = require('../controllers/employees/leads')
+const customersController = require('../controllers/employees/customers')
 
 
 /* Dashboard */
@@ -17,6 +19,13 @@ router.route('/home')
 router.route('/users')
 .get(usersController.getUsers)
 .post(usersController.postUsers)
+
+router.route('/leads')
+.get(leadsController.getLeads)
+
+router.route('/customers')
+.get(customersController.getCustomers)
+
 
 router.route('/settings')
 .get(settingsController.getSettings)

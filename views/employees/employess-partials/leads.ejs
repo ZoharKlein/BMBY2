@@ -1,0 +1,185 @@
+<h1><%=  content  %></h1>
+
+
+<div class="users">
+
+
+<script>
+
+</script>
+<form action="users" method="post">
+
+
+
+<table class="dashboard-tale">
+            <tr>
+                <td>First Name</td>
+                <td>Last Name</td>
+                <td class="dasboard-table-phne-off">Email</td>
+                <td class="dasboard-table-phne-off">Title</td>
+                <td class="dasboard-table-phne-off">Now Status</td>
+                <td class="dasboard-table-phne-off">Date</td>
+                <td></td>        
+            </tr>  
+
+
+
+    <%  for(i = 0 ; i < pageData.itemPerPage && i < leads.length ; i++) { %>
+        
+            <% if (i % 2 === 0) { %>
+                     <tr class="double">
+                <% } else { %>
+                <tr >
+            <% } %>
+
+
+ 
+                <td><%= leads[i].firstname %></td>
+                <td class="dasboard-table-phne-off"><%= leads[i].lastname %></td>
+                <td class="dasboard-table-phne-off" ><%= leads[i].email %></td>
+                <td><%= leads[i].title %></td>
+                <td class="dasboard-table-phne-off" ><%= leads[i].now_status %></td>
+                <td class="dasboard-table-phne-off" ><%=  leads[i].date.getDate() + "-" + (leads[i].date.getMonth() + 1) + "-" + leads[i].date.getFullYear()  %></td>
+                <td>
+
+                <% if (i % 2 === 0) { %>
+                     <button onClick="showModal(<%= JSON.stringify(leads) %>,<%=i%>)" class="btn-double" type="">Processes</button>
+                <% } else { %>
+                 <button onClick="showModal(<%= JSON.stringify(leads) %>,<%=i%>)" class="btn-odd" type="">Processes</button>
+            <% } %>
+            </td>
+                
+
+            </tr>      
+    <% } %>
+    
+
+</table>
+
+    <div class="paging">
+
+        
+        <% if (pageData.prev) { %>
+            <button name="changepage" value="<%= pageData.pageIndex - 1 %>" class="prev page-btn" type="submit">Prev</button> 
+        <% } %>
+        
+
+        <% if (pageData.next) { %>
+            <button name="changepage" value="<%= pageData.pageIndex + 1%>" class="next page-btn" type="submit">Next</button>
+        <% } %>
+        
+
+    </div>
+
+</div>
+
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+
+
+        <h1 id="modal-fullname"></h1>
+        <h2 id="modal-title"></h2>
+        
+        <input type="hidden" id="userID" name="userID" value="">
+        
+        <div id="modal-leads-processes">
+            
+        </div>
+
+        <br>
+
+
+
+
+  </div>
+
+</div>
+</form>
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementsByClassName("btn-edit");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  console.log('ok')
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+    function showModal(leads,index) {
+
+        modal.style.display = "block";
+        
+
+
+
+
+        document.getElementById("modal-fullname").innerHTML = leads[index].firstname + " " + leads[index].lastname
+        document.getElementById("modal-title").innerHTML = leads[index].title
+
+        let html = ""
+
+        leads[index].thisleadprocesses.forEach(element => {
+            console.log(element)
+            
+            const date = new Date(element.last_date_modified)
+
+            console.log(date.getDate())
+
+            html+= `
+            <div>
+            <hr>
+                <table>
+
+                    <tr>
+                    <td> Status :</td> <td> ${element.status}</td>
+                    </tr>
+                    <tr>
+                    <td> Status :</td> <td> ${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}</td>
+                    </tr>
+
+                </table>
+
+            </div>
+            `
+
+        })
+
+        document.getElementById("modal-leads-processes").innerHTML = html
+
+
+
+
+
+        
+        //document.getElementById("userID").value = user[index].userID
+
+    }
+
+</script>
+
+

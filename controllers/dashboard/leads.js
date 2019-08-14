@@ -24,7 +24,7 @@ exports.postLeads = (req, res, next) => {
 
 
 
-getDataFromDB  = (req,res,next) => {
+const getDataFromDB  = (req,res,next) => {
     mongoose.Lead.aggregate([
 
         {  $match: {cid: global.loginCustomer.id }},
