@@ -43,6 +43,7 @@ const leadProcessSchema = new mongoose.Schema({
     user_id: {type : Number , sparse : true, required : true} ,
     status: {type : String , sparse : true, required : true},
     last_date_modified: {type : Date , sparse : true, required : true},
+    msg: {type : String , sparse : true, msg : true},
 
 })
 

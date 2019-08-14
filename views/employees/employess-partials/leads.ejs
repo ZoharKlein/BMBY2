@@ -4,11 +4,6 @@
 <div class="users">
 
 
-<script>
-
-</script>
-<form action="users" method="post">
-
 
 
 <table class="dashboard-tale">
@@ -52,10 +47,10 @@
 
             </tr>      
     <% } %>
-    
 
 </table>
 
+<form action="leads" method="post">
     <div class="paging">
 
         
@@ -82,11 +77,11 @@
   <div class="modal-content">
     <span class="close">&times;</span>
 
-
         <h1 id="modal-fullname"></h1>
         <h2 id="modal-title"></h2>
         
         <input type="hidden" id="userID" name="userID" value="">
+        <input type="hidden" id="leadID" name="leadID" value="">
         
         <div id="modal-leads-processes">
             
@@ -94,13 +89,27 @@
 
         <br>
 
+        <h2 id="moodal-newleadprocess">New Lead Process</h2>
+        <input placeholder="Write here the contet of the call" type="textarea" name="msg" value="">
+        <br>
+        <select name="status">
+            <% for(staus in leadStaus) { %>
 
-
+                <% if (leadStaus[staus] !== "New lead") { %>
+                    <option value="<%= leadStaus[staus] %>"><%= leadStaus[staus] %></option>
+                    
+                <% } %>
+            <% } %>
+            </select>
+        <br>
+        <button value="add" name="btnAdd" type="submit">Add new lead process</button>
 
   </div>
 
 </div>
+
 </form>
+
 
 <script>
 // Get the modal
@@ -159,7 +168,10 @@ window.onclick = function(event) {
                     <td> Status :</td> <td> ${element.status}</td>
                     </tr>
                     <tr>
-                    <td> Status :</td> <td> ${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}</td>
+                    <td> Date :</td> <td> ${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}</td>
+                    </tr>
+                    <tr>
+                    <td> Info :</td> <td> ${element.msg}</td>
                     </tr>
 
                 </table>
@@ -171,12 +183,12 @@ window.onclick = function(event) {
 
         document.getElementById("modal-leads-processes").innerHTML = html
 
+        document.getElementById("userID").value = leads[index].userID
+        document.getElementById("leadID").value = leads[index]._id
 
 
+        console.log(leads[index]._id,leads[index].userID)
 
-
-        
-        //document.getElementById("userID").value = user[index].userID
 
     }
 

@@ -22,6 +22,7 @@ router.route('/users')
 
 router.route('/leads')
 .get(leadsController.getLeads)
+.post(leadsController.postLeads)
 
 router.route('/customers')
 .get(customersController.getCustomers)

@@ -1,6 +1,7 @@
 
+const Lead = require('../../models/Lead')
+const LeadProcess = require('../../models/LeadProcess')
 const User = require('../../models/User')
-const mysql = require('../../db/mysql')
 const mongoose = require('../../db/mongoose')
 
 
@@ -18,11 +19,51 @@ const paging = {
 
 exports.getLeads = (req, res, next) => {
     
-
     getDataFromDB(req,res,next)
 
 
 }
+
+
+exports.postLeads = (req, res, next) => {
+    
+    console.log(req.body,"post")
+    
+    paging.pageIndex = parseInt(req.body.changepage)
+
+    if (req.body.btnAdd === 'add') {
+       
+        mongoose.Lead.findByIdAndUpdate(mongoose.ObjectId(req.body.leadID), { now_status: req.body.status })
+        .then(add => { 
+            console.log(add)
+
+            const leadProcess = new LeadProcess({
+                status: req.body.status,
+                userID : parseInt(req.body.userID),
+                leadID: mongoose.ObjectId(req.body.leadID),
+                msg: req.body.msg
+            })
+            
+            leadProcess.save()
+            res.redirect('/employees/dashboard/leads')
+            
+        
+        
+        })
+        .catch(err => { console.log(err) } )
+
+
+    }
+
+    else {
+
+        getDataFromDB(req,res,next)
+
+    }
+
+
+}
+
 
 const setPageData = (listOfUsers) => {
     console.log(1)
@@ -41,9 +82,17 @@ const setPageData = (listOfUsers) => {
 }
 
 const getDataFromDB  = (req,res,next) => {
+    console.log(paging.pageIndex * paging.itemPerPage , 'errr')
+    
+    let skip = paging.pageIndex * paging.itemPerPage
+    if (typeof skip !== Number ) {
+         skip = 0;
+    }
+    console.log(skip,"skip")
+
     mongoose.Lead.aggregate([
 
-        {  $match: {userId: global.loginEmployee.userId}},
+        {  $match: {userID: global.loginEmployee.userID}},
         {  $lookup: {
                 from: "leadprocesses",
                 localField: "_id",
@@ -54,7 +103,7 @@ const getDataFromDB  = (req,res,next) => {
         { $match: {"thisleadprocesses": {$ne: []} } },
         { $sort: {"thisleadprocesses.last_date_modified": -1} },
     ])
-    .skip(paging.pageIndex * 10)
+    .skip(skip)
     .limit(paging.itemPerPage + 1)
     .then(
 
@@ -82,14 +131,13 @@ const renderLeadsTable = (req,res,next,results) => {
         menu = User.selectMenuByRole(global.loginEmployee.role)
     }
 
-    console.log(results)
-
     res.render('employees/dashboard',{
         user : global.loginEmployee,
         userMenu: menu,
         content: "Leads",
         leads: results,
         pageData : paging,
+        leadStaus: Lead.leadStatus
 
       })
 } 

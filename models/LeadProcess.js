@@ -10,6 +10,7 @@ module.exports = class LeadProcess {
             user_id: data.userID, 
             status: data.status,
             last_date_modified: new Date(),
+            msg: data.msg
         })
     }
 
