@@ -24,7 +24,7 @@ const employeesRouter = require('./routers/employees')
 const errorController = require('./controllers/errorController')
 
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3001
 
 
 app.use(cors())

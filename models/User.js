@@ -48,7 +48,7 @@ module.exports.selectMenuByRole = (role) => {
             break
         }
         case 'administrator': {
-            return admin
+            return adminMenuWithImg
             break
         }
         case 'worker': {
@@ -65,16 +65,20 @@ module.exports.selectMenuByRole = (role) => {
 
 }
 
-const superAdmin = ['Home','Leads','Users','Reports','Settings','Logout']
-const admin = ['Home','Leads','Reports','Settings','Logout']
-const worker = ['Home','Leads','Settings','Logout']
-
 const sumperAdminMenuWithImg = [ 
     {title: 'Home', imgURL: 'https://image.flaticon.com/icons/svg/609/609803.svg'} ,
     {title: 'Leads', imgURL: 'https://image.flaticon.com/icons/svg/1979/1979367.svg'} ,
     {title: 'Users', imgURL: 'https://www.flaticon.com/premium-icon/icons/svg/1165/1165725.svg'} ,
     {title: 'Customers', imgURL: 'https://image.flaticon.com/icons/svg/1605/1605350.svg'} ,
     {title: 'Reports', imgURL: 'https://image.flaticon.com/icons/svg/858/858699.svg'} ,
+    {title: 'Settings', imgURL: 'https://image.flaticon.com/icons/svg/1055/1055683.svg'}
+]
+
+const adminMenuWithImg = [ 
+    {title: 'Home', imgURL: 'https://image.flaticon.com/icons/svg/609/609803.svg'} ,
+    {title: 'Leads', imgURL: 'https://image.flaticon.com/icons/svg/1979/1979367.svg'} ,
+    {title: 'Users', imgURL: 'https://www.flaticon.com/premium-icon/icons/svg/1165/1165725.svg'} ,
+    {title: 'Customers', imgURL: 'https://image.flaticon.com/icons/svg/1605/1605350.svg'} ,
     {title: 'Settings', imgURL: 'https://image.flaticon.com/icons/svg/1055/1055683.svg'}
 ]
 

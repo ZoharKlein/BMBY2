@@ -18,7 +18,7 @@ module.exports = class Lead {
                 msg: data.msg,
                 title: data.title,
                 userID: data.userID,
-                now_status: leadStatus.new,
+                now_status: leadStatus.newLead,
                 date: new Date()
             
             })
@@ -31,7 +31,7 @@ module.exports = class Lead {
     save() {
         this.lead.save()
         .then(result => { 
-                const leadProcess = new LeadProcess({status: leadStatus.new, userID : result.userID, leadID: result._id, msg:"New lead enterd"})
+                const leadProcess = new LeadProcess({status: leadStatus.newLead, userID : result.userID, leadID: result._id, msg:"New lead enterd"})
                 leadProcess.save()
                 this.lead
               
@@ -41,7 +41,7 @@ module.exports = class Lead {
 }
 
 const leadStatus = {
-    new:'New lead',
+    newLead:'New lead',
     finsh: 'Finsh the lead process',
     waitForAdmin: 'Waiting for admin check',
     waitForClientAnswer: 'Wait to hear from the client'

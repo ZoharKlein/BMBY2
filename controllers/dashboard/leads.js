@@ -38,7 +38,7 @@ const getDataFromDB  = (req,res,next) => {
         { $match: {"thisleadprocesses": {$ne: []} } },
         { $sort: {"thisleadprocesses.last_date_modified": -1} },
     ])
-    .skip(paging.pageIndex * 10)
+    .skip(paging.pageIndex * paging.itemPerPage)
     .limit(paging.itemPerPage + 1)
     .then(
 

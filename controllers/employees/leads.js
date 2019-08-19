@@ -6,7 +6,21 @@ const mongoose = require('../../db/mongoose')
 
 
 const sortSelector = {
-    selector: [ {orderBy:'firstName', view:'First Name'},{orderBy:'lastName', view:'Last Name'},{orderBy:'email', view:'Email'}],
+    selector: [ 
+        {orderBy:'firstName', view:'First Name'},
+        {orderBy:'lastName', view:'Last Name'},
+        {orderBy:'email', view:'Email'},
+        {orderBy:'date', view:'Date'}    
+    ],
+    selected: 'firstName'
+}
+
+const groupSelector = {
+    selector: [ 
+        {groupBy: Lead.leadStatus.newLead, view:Lead.leadStatus.newLead},
+        {groupBy: Lead.leadStatus.waitForAdmin, view:Lead.leadStatus.waitForAdmin},
+        {groupBy: Lead.leadStatus.waitForClientAnswer , view:Lead.leadStatus.waitForClientAnswer},
+        {groupBy: Lead.leadStatus.finsh, view:Lead.leadStatus.finsh}],
     selected: 'firstName'
 }
 
@@ -27,15 +41,26 @@ exports.getLeads = (req, res, next) => {
 
 exports.postLeads = (req, res, next) => {
     
-    console.log(req.body,"post")
     
-    paging.pageIndex = parseInt(req.body.changepage)
+    console.log(req.body,"post")
+
+
+    if (req.body.changepage === undefined) {
+        paging.pageIndex = 0
+
+    }
+    else {
+        paging.pageIndex = parseInt(req.body.changepage)
+
+    }
+    console.log(paging)
+    
 
     if (req.body.btnAdd === 'add') {
        
         mongoose.Lead.findByIdAndUpdate(mongoose.ObjectId(req.body.leadID), { now_status: req.body.status })
         .then(add => { 
-            console.log(add)
+           // console.log(add)
 
             const leadProcess = new LeadProcess({
                 status: req.body.status,
@@ -45,7 +70,9 @@ exports.postLeads = (req, res, next) => {
             })
             
             leadProcess.save()
-            res.redirect('/employees/dashboard/leads')
+            
+            getDataFromDB(req,res,next,parseInt(req.body.changepage))
+
             
         
         
@@ -82,13 +109,7 @@ const setPageData = (listOfUsers) => {
 }
 
 const getDataFromDB  = (req,res,next) => {
-    console.log(paging.pageIndex * paging.itemPerPage , 'errr')
-    
-    let skip = paging.pageIndex * paging.itemPerPage
-    if (typeof skip !== Number ) {
-         skip = 0;
-    }
-    console.log(skip,"skip")
+
 
     mongoose.Lead.aggregate([
 
@@ -103,12 +124,12 @@ const getDataFromDB  = (req,res,next) => {
         { $match: {"thisleadprocesses": {$ne: []} } },
         { $sort: {"thisleadprocesses.last_date_modified": -1} },
     ])
-    .skip(skip)
+    .skip(paging.pageIndex * paging.itemPerPage)
     .limit(paging.itemPerPage + 1)
     .then(
 
         results =>  {
-        console.log(results)
+        //console.log(results)
 
         setPageData(results)
         
@@ -130,7 +151,6 @@ const renderLeadsTable = (req,res,next,results) => {
     } else {
         menu = User.selectMenuByRole(global.loginEmployee.role)
     }
-
     res.render('employees/dashboard',{
         user : global.loginEmployee,
         userMenu: menu,

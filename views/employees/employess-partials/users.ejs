@@ -8,9 +8,12 @@
    
         <div class="sort-selction">
 
-            <button name="changepage" value="<%= pageData.pageIndex%>" type="submit">Order</button>
-            <select name="option">
 
+            
+
+            
+            <label for="">Sort</label>
+            <select name="option">
 
             <% for(i = 0; i < select.selector.length ; i ++) { %>
                <% if (select.selected === select.selector[i].orderBy) { %>
@@ -27,7 +30,27 @@
              
             </select>
 
-           
+            <label for="">Filter</label>
+            <select name="group">
+
+            <% for(i = 0; i < group.selector.length ; i ++) { %>
+
+
+               <% if (group.selected === group.selector[i].groupBy) { %>
+                    
+                    <option selected value="<%= group.selector[i].groupBy %>"><%= group.selector[i].view %></option>
+
+              <%  } else { %>
+                    
+                    <option value="<%= group.selector[i].groupBy %>"><%= group.selector[i].view %></option>
+
+             <% } %>
+
+             <% } %>
+             
+            </select>
+
+                       <button name="order" value="order" type="submit">Go</button>
         </div>
 
 
@@ -108,6 +131,7 @@
         
         <input type="hidden" id="userID" name="userID" value="">
         
+        <% if (user.role === userRoles.SUPER_ADMINISTRATOR)  { %>
         <h2>Change Role</h2>
         <select name="roleUpdateOption">
 
@@ -118,6 +142,7 @@
 
             <% } %>
         </select>
+        <% } %>
 
         <h2>Change status</h2>
         <select name="statusUpdateOption">
@@ -129,7 +154,12 @@
             <% } %>
             </select>
         <br>
+
+        <% if (user.role === userRoles.SUPER_ADMINISTRATOR)  { %>
         <button value="delete" name="btnEdit" type="submit">Delete User</button>
+        <% } %>
+        <br>
+
         <button value="edit" name="btnEdit" type="submit">Update User</button>
 
 

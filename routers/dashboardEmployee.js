@@ -7,6 +7,7 @@ const usersController = require('../controllers/employees/users')
 const settingsController = require('../controllers/employees/settings')
 const leadsController = require('../controllers/employees/leads')
 const customersController = require('../controllers/employees/customers')
+const reportsController = require('../controllers/employees/reports')
 
 
 /* Dashboard */
@@ -27,6 +28,8 @@ router.route('/leads')
 router.route('/customers')
 .get(customersController.getCustomers)
 
+router.route('/reports')
+.get(reportsController.getReports)
 
 router.route('/settings')
 .get(settingsController.getSettings)

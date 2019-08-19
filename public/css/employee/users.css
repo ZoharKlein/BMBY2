@@ -97,8 +97,9 @@
 
 .sort-selction {
     width: 70%;
-    float: left;
-    padding-top: 100px; 
+    text-align: center;
+    padding: 20px; 
+    margin: 0 auto;
 }
 .sort-selction button{
     background-color: #f7c22b;
@@ -151,6 +152,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
   text-decoration: none;
   cursor: pointer;
 }
+
 
 @media only screen and (max-width: 600px) {
     .dasboard-table-phne-off {

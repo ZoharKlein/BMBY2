@@ -3,8 +3,22 @@ const User = require('../../models/User')
 const mysql = require('../../db/mysql')
 
 const sortSelector = {
-    selector: [ {orderBy:'firstName', view:'First Name'},{orderBy:'lastName', view:'Last Name'},{orderBy:'email', view:'Email'}],
+    selector: [ 
+        {orderBy:'firstName', view:'First Name'},
+        {orderBy:'lastName', view:'Last Name'},
+        {orderBy:'email', view:'Email'}
+    ],
     selected: 'firstName'
+}
+
+const groupSelector = {
+    selector: [
+        {groupBy: "all", view: "All"},
+        {groupBy: User.userStats.APPROVED, view: User.userStats.APPROVED},
+        {groupBy: User.userStats.SUSPENDED, view: User.userStats.SUSPENDED},
+        {groupBy: User.userStats.WAIT_FOR_HACK, view: User.userStats.WAIT_FOR_HACK}
+    ],
+    selected: 'all'
 }
 
 const paging = {
@@ -47,7 +61,15 @@ exports.postUsers = (req, res, next) => {
         .catch(err => { console.log(err) })    
     }
     else {
-        renderTable(req,res,next,parseInt(req.body.changepage),req.body.option)
+
+        let pagenumber 
+        if (req.body.order === "order") {
+            pagenumber = 0
+        } else {
+            pagenumber = parseInt(req.body.changepage)
+        }
+        
+        renderTable(req,res,next,pagenumber,req.body.option,req.body.group)
         
     }
 
@@ -73,29 +95,55 @@ setPageData = (listOfUsers) => {
     }
 }
 
-renderTable = (req,res,next, pageIndex = 0,order = "userID") => {
+renderTable = (req,res,next, pageIndex = 0,order = "userID",group="all") => {
 
   //  console.log(order)
     paging.pageIndex = pageIndex
 //    console.log(paging.pageIndex)
 
     let menu
+    let sqlCommand
 
     if (global.loginEmployee === undefined) {
         menu = undefined
     } else {
         menu = User.selectMenuByRole(global.loginEmployee.role)
     }
+    
 
-//console.log(`${mysql.findAllUsersExeptOne(global.loginEmployee.userID)}
-//${mysql.orderBy(order)}                  
-//${mysql.limitFromStartToEnd(paging.pageIndex * 10,paging.itemPerPage + 1)}
-//`)
+    let roles = ""
+    
+    for (role in User.userRole ) {
 
-    mysql.EnterQuery(`${mysql.findAllUsersExeptOne(global.loginEmployee.userID)}
-                      ${mysql.orderBy(order)}                  
+        if (User.userRole[role] === global.loginEmployee.role) {
+            roles += `"  "`
+            break
+        }
+        else {
+            roles += `"${role}",`
+        }
+
+    }
+
+    if (group === 'all')
+    {
+        sqlCommand = `${mysql.findAllUsersExeptOne(global.loginEmployee.userID,roles)}
+                      ${mysql.orderBy(order)}                 
                       ${mysql.limitFromStartToEnd(paging.pageIndex * 10,paging.itemPerPage + 1)}
-                      ` )
+                      `
+
+    } 
+
+    else {
+
+        sqlCommand =`${mysql.findAllUsersExeptOneByStatus(global.loginEmployee.userID,group)}
+        ${mysql.orderBy(order)}                  
+        ${mysql.limitFromStartToEnd(paging.pageIndex * 10,paging.itemPerPage + 1)}
+        `
+
+    }
+
+    mysql.EnterQuery(sqlCommand)
     .then(result => {
 
         //console.log(req.params);
@@ -103,6 +151,9 @@ renderTable = (req,res,next, pageIndex = 0,order = "userID") => {
         const listOfUsers = result
         console.log('listofusers')
         //console.log(listOfUsers)
+
+        sortSelector.selected = order
+        groupSelector.selected = group
 
 
         setPageData(listOfUsers)
@@ -114,6 +165,7 @@ renderTable = (req,res,next, pageIndex = 0,order = "userID") => {
             users: listOfUsers,
             pageData : paging,
             select: sortSelector,
+            group: groupSelector,
             userRoles: User.userRole,
             userStats: User.userStats
           })
@@ -128,3 +180,4 @@ renderTable = (req,res,next, pageIndex = 0,order = "userID") => {
 
 
 }
+

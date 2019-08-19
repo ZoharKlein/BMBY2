@@ -32,7 +32,10 @@ exports.InsertDataFromMySQL = async(sqlCommand) => {
 }
 //select
 exports.findAllUsersId = 'SELECT userID FROM users'
-exports.findAllUsersExeptOne = userID => {return `SELECT * FROM users WHERE NOT userID = '${userID}'`}
+exports.findAllUsersExeptOne = (userID,roles) => {return `SELECT * FROM users WHERE NOT userID = '${userID}' AND role IN (${roles})`}
+exports.findAllUsersExeptOneByStatus = (userID,status) => {return `SELECT * FROM users WHERE NOT userID = '${userID}' AND status = "${status}" `}
+
+
 exports.findUserByMail = email => {return `SELECT * FROM users WHERE email = '${email}'`}
 exports.findUserByMailAndPassword = (email,password) => {return `SELECT * FROM users WHERE email = '${email}' AND 'password' = '${password}'`}
 exports.findUsersByRole = (role) => {return `SELECT * FROM users WHERE role='${role}'`}

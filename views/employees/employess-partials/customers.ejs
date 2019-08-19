@@ -1,2 +1,65 @@
 <h1><%=  content  %></h1>
 
+<div class="users">
+
+
+<table class="dashboard-tale">
+            <tr>
+                <td>Company</td>
+                <td>Email</td>
+                <td class="dasboard-table-phne-off">Lane</td>
+                <td class="dasboard-table-phne-off">Expiry Date</td>     
+            </tr>  
+
+
+
+    <%  for(i = 0 ; i < pageData.itemPerPage && i < leads.length ; i++) { %>
+        
+            <% if (i % 2 === 0) { %>
+                     <tr class="double">
+                <% } else { %>
+                <tr >
+            <% } %>
+
+
+ 
+                <td><%= leads[i].companyName %></td>
+                <td class="dasboard-table-phne-off"><%= leads[i].email %></td>
+                <td class="dasboard-table-phne-off" ><%= leads[i].lane %></td>
+
+                <% if (leads[i].lane !== 'None') { %>
+
+                <td class="dasboard-table-phne-off" ><%=  leads[i].expDate.getDate() + "-" + (leads[i].expDate.getMonth() + 1) + "-" + leads[i].expDate.getFullYear()  %></td>
+
+                <% } else { %>
+                        <td>X</td>
+                <% } %>
+
+    
+
+            </tr>      
+    <% } %>
+
+</table>
+
+<form action="leads" method="post">
+    <div class="paging">
+
+        
+        <% if (pageData.prev) { %>
+            <button name="changepage" value="<%= pageData.pageIndex - 1 %>" class="prev page-btn" type="submit">Prev</button> 
+        <% } %>
+        
+
+        <% if (pageData.next) { %>
+            <button name="changepage" value="<%= pageData.pageIndex + 1%>" class="next page-btn" type="submit">Next</button>
+        <% } %>
+        
+
+    </div>
+
+</div>
+
+
+
+</form>
