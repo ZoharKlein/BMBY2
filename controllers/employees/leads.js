@@ -113,7 +113,7 @@ const getDataFromDB  = (req,res,next) => {
 
     mongoose.Lead.aggregate([
 
-        {  $match: {userID: global.loginEmployee.userID}},
+        {  $match: {userID: req.session.loginUser.userID}},
         {  $lookup: {
                 from: "leadprocesses",
                 localField: "_id",
@@ -146,13 +146,13 @@ const renderLeadsTable = (req,res,next,results) => {
 
     let menu
 
-    if (global.loginEmployee === undefined) {
+    if (req.session.loginUser === undefined) {
         menu = undefined
     } else {
-        menu = User.selectMenuByRole(global.loginEmployee.role)
+        menu = User.selectMenuByRole(req.session.loginUser.role)
     }
     res.render('employees/dashboard',{
-        user : global.loginEmployee,
+        user : req.session.loginUser,
         userMenu: menu,
         content: "Leads",
         leads: results,

@@ -31,8 +31,7 @@
     </table>
 
     <% if (daysLeft < 30 ) { %>
-        <form>
-            <button type="submit">Renew</button>
-        </form>
+        <h2>Renew now (you have less than 30 dayes left)</h2>
+            <%-include("price-menu") -%>
 
     <% } %> 

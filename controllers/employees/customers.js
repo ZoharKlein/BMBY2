@@ -134,13 +134,13 @@ const renderCustomersTable = (req,res,next,results) => {
 
     let menu
 
-    if (global.loginEmployee === undefined) {
+    if (req.session.loginUser === undefined) {
         menu = undefined
     } else {
-        menu = User.selectMenuByRole(global.loginEmployee.role)
+        menu = User.selectMenuByRole(req.session.loginUser.role)
     }
     res.render('employees/dashboard',{
-        user : global.loginEmployee,
+        user : req.session.loginUser,
         userMenu: menu,
         content: "Customers",
         leads: results,

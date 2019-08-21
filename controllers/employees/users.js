@@ -104,10 +104,10 @@ renderTable = (req,res,next, pageIndex = 0,order = "userID",group="all") => {
     let menu
     let sqlCommand
 
-    if (global.loginEmployee === undefined) {
+    if (req.session.loginUser === undefined) {
         menu = undefined
     } else {
-        menu = User.selectMenuByRole(global.loginEmployee.role)
+        menu = User.selectMenuByRole(req.session.loginUser.role)
     }
     
 
@@ -115,7 +115,7 @@ renderTable = (req,res,next, pageIndex = 0,order = "userID",group="all") => {
     
     for (role in User.userRole ) {
 
-        if (User.userRole[role] === global.loginEmployee.role) {
+        if (User.userRole[role] === req.session.loginUser.role) {
             roles += `"  "`
             break
         }
@@ -127,7 +127,7 @@ renderTable = (req,res,next, pageIndex = 0,order = "userID",group="all") => {
 
     if (group === 'all')
     {
-        sqlCommand = `${mysql.findAllUsersExeptOne(global.loginEmployee.userID,roles)}
+        sqlCommand = `${mysql.findAllUsersExeptOne(req.session.loginUser.userID,roles)}
                       ${mysql.orderBy(order)}                 
                       ${mysql.limitFromStartToEnd(paging.pageIndex * 10,paging.itemPerPage + 1)}
                       `
@@ -136,7 +136,7 @@ renderTable = (req,res,next, pageIndex = 0,order = "userID",group="all") => {
 
     else {
 
-        sqlCommand =`${mysql.findAllUsersExeptOneByStatus(global.loginEmployee.userID,group)}
+        sqlCommand =`${mysql.findAllUsersExeptOneByStatus(req.session.loginUser.userID,group)}
         ${mysql.orderBy(order)}                  
         ${mysql.limitFromStartToEnd(paging.pageIndex * 10,paging.itemPerPage + 1)}
         `
@@ -159,7 +159,7 @@ renderTable = (req,res,next, pageIndex = 0,order = "userID",group="all") => {
         setPageData(listOfUsers)
 
         res.render('employees/dashboard',{
-            user : global.loginEmployee,
+            user : req.session.loginUser,
             userMenu: menu,
             content: "Users",
             users: listOfUsers,

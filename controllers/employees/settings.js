@@ -9,8 +9,8 @@ const bcryptjs = require('bcryptjs')
 exports.getSettings = (req, res, next) => {
 
     res.render('employees/dashboard',{
-        user : global.loginEmployee,
-        userMenu: User.selectMenuByRole(global.loginEmployee.role),
+        user : req.session.loginUser,
+        userMenu: User.selectMenuByRole(req.session.loginUser.role),
         content: "Settings"
       })
 
@@ -30,9 +30,9 @@ exports.postSettings = (req, res, next) => {
                 //return err to user
             }
             else {
-                mysql.EnterQuery(mysql.updateProfileImgByID(imgURL,global.loginEmployee.userID))
+                mysql.EnterQuery(mysql.updateProfileImgByID(imgURL,req.session.loginUser.userID))
                 .then(result => 
-                    global.loginEmployee.profileImg = imgURL
+                    req.session.loginUser.profileImg = imgURL
                 )
                 .catch(err => { console.log(err) })
                 
@@ -45,13 +45,13 @@ exports.postSettings = (req, res, next) => {
             if (errMsg[0] === undefined) {
                 //update sql
                 mysql.EnterQuery(mysql.updateDetailes(req.body.firstName,req.body.lastName,
-                    req.body.city,req.body.email,req.body.mobile,global.loginEmployee.userID))
+                    req.body.city,req.body.email,req.body.mobile,req.session.loginUser.userID))
                     .then(result => {
-                        global.loginEmployee.firstName = req.body.firstName
-                        global.loginEmployee.lastName = req.body.lastName
-                        global.loginEmployee.email = req.body.email
-                        global.loginEmployee.mobile = req.body.mobile
-                        global.loginEmployee.city = req.body.city
+                        req.session.loginUser.firstName = req.body.firstName
+                        req.session.loginUser.lastName = req.body.lastName
+                        req.session.loginUser.email = req.body.email
+                        req.session.loginUser.mobile = req.body.mobile
+                        req.session.loginUser.city = req.body.city
                          errMsg.push('Details Updated.')})
                     .catch(err => { console.log(err)})
             }
@@ -65,13 +65,13 @@ exports.postSettings = (req, res, next) => {
              if (req.body.password === req.body.passwordVerify) {
                 
                 // if password are true update
-                bcryptjs.compare(req.body.oldPassword,global.loginEmployee.password , (err, isMatch) => {
+                bcryptjs.compare(req.body.oldPassword,req.session.loginUser.password , (err, isMatch) => {
                     if (err) {
 
                     } else {
                       if (isMatch) {
 
-                        bcryptjs.compare(req.body.password, global.loginEmployee.password , (err, isMatch) => {
+                        bcryptjs.compare(req.body.password, req.session.loginUser.password , (err, isMatch) => {
                             if (err) {
 
                             } else {
@@ -95,7 +95,7 @@ exports.postSettings = (req, res, next) => {
                                         console.log(hashErr)
                                         }
                                         else {
-                                            mysql.EnterQuery(mysql.updatePasswordByID(hash,global.loginEmployee.userID))
+                                            mysql.EnterQuery(mysql.updatePasswordByID(hash,req.session.loginUser.userID))
                                             .then(res=> {
                                                 errMsg.push('Update new password fine.')
                                             } )
@@ -132,8 +132,8 @@ exports.postSettings = (req, res, next) => {
         }
         default : {
             res.render('employees/dashboard',{
-                user : global.loginEmployee,
-                userMenu: User.selectMenuByRole(global.loginEmployee.role),
+                user : req.session.loginUser,
+                userMenu: User.selectMenuByRole(req.session.loginUser.role),
                 content: "Settings"
               })
             break;
@@ -142,15 +142,15 @@ exports.postSettings = (req, res, next) => {
     }
     setTimeout(() => {
         console.log(errMsg)
-        renderSettings(res,errMsg)
+        renderSettings(req,res,errMsg)
     }, 1000);
 
 }
 
-const renderSettings = (res, errMsg = undefined) => {
+const renderSettings = (req,res, errMsg = undefined) => {
     res.render('employees/dashboard',{
-        user : global.loginEmployee,
-        userMenu: User.selectMenuByRole(global.loginEmployee.role),
+        user : req.session.loginUser,
+        userMenu: User.selectMenuByRole(req.session.loginUser.role),
         content: "Settings",
         updateErr: errMsg
       })

@@ -1,5 +1,10 @@
 {
     "Dev": {
+        "mailConfig": {
+            "api":"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"
+
+        },
+
         "dbConfig": {
             "mySQL": {
 

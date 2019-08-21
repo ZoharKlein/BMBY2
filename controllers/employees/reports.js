@@ -11,10 +11,10 @@ exports.getReports = (req, res, next) => {
 
     let menu
 
-    if (global.loginEmployee === undefined) {
+    if (req.session.loginUser === undefined) {
         menu = undefined
     } else {
-        menu = User.selectMenuByRole(global.loginEmployee.role)
+        menu = User.selectMenuByRole(req.session.loginUser.role)
     }
     
     const a = `${now.getFullYear()}-${now.getMonth() + 1}-01`
@@ -32,7 +32,7 @@ exports.getReports = (req, res, next) => {
         console.log(stats)
     
         res.render('employees/dashboard',{
-            user : global.loginEmployee,
+            user : req.session.loginUser,
             userMenu: menu,
             content: "Reports",
             stats: stats

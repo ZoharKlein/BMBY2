@@ -9,7 +9,7 @@
         <div="dashboard">
        
 
-                    <% if (customer.lane === 'None') { %>
+                    <% if (customer.lane === 'None' || expDate) { %>
                             <h1>Hello <%= customer.companyName %></h1>
                             <%-include("dashboard-partials/price-menu") -%>
                             

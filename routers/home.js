@@ -19,6 +19,7 @@ const ourCrmController = require('../controllers/home/ourCRM')
 const contactUsController = require('../controllers/home/contactUs')
 const signUpController = require('../controllers/home/signUp')
 const loginController = require('../controllers/home/login')
+const newpassController = require('../controllers/home/newpass')
 
 /* Home */
 router.route('/')
@@ -41,6 +42,11 @@ router.route('/contact')
 router.route('/login')
 .get(loginController.getLogin)
 .post(loginController.postLogin)
+
+/* Forgot Password */
+router.route('/newpass')
+.get(newpassController.getNewpass)
+.post(newpassController.postNewpass)
 
 /* Sign Up */
 router.route('/signup')

@@ -5,10 +5,36 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const config = require('config');
-
-const jwt = require('jsonwebtoken')
-
 global.config = config
+// const jwt = require('jsonwebtoken')
+
+//mongo for session
+const MongoDBStore = require('connect-mongodb-session')(session)
+const store = new MongoDBStore({
+    uri: global.config.get('Dev.dbConfig.mongoDB').mongoURL,
+    collection: "sessions"
+}) 
+
+
+//mail
+const nodemiler = require('nodemailer')
+const sendgridTransport = require('nodemailer-sendgrid-transport')
+
+const transporter = nodemiler.createTransport(sendgridTransport({
+    auth:{
+        api_key: "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",
+
+    }
+}))
+
+//add to places that need that
+
+// transporter.sendMail({
+    // to: "walla501@walla.com",
+    // from: "admin@bmby2.com",
+    // subject: "test",
+    // html: '<h1>sucsses</h1>'
+// }).catch(err => {console.log(err)})
 
 ///Routers
 const leadAPI = require('./routers/LeadApi/leadAPI')
@@ -24,7 +50,7 @@ const employeesRouter = require('./routers/employees')
 const errorController = require('./controllers/errorController')
 
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3000
 
 
 app.use(cors())
@@ -43,6 +69,7 @@ app.use(session({
     name: "sid",
     saveUninitialized: false,
     secret: "zohar", 
+    store: store,
     cookie: { 
         maxAge: 1000 * 60 * 60 * 24 * 7,//week
         sameSite: true,

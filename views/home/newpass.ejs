@@ -1,0 +1,24 @@
+<%-include("home-partials/header") -%>
+
+<title><%=title%></title>
+
+<%-include("home-partials/navbar") -%>
+
+<div class="container">
+    <div class="row d-flex align-items-center hero">
+        <div class="col-sm">
+            <h1 class="hero-title mb-4"><%=title%>
+
+            <h2><%=msg%></h2>
+            <form action="/newpass" method="post">
+            
+                <input placeholder="Email" type="text" name="email">
+
+            <button type="submit">Send New Password</button>
+        
+        </div>
+
+    </div>
+</div>
+
+<%-include("home-partials/footer") -%>

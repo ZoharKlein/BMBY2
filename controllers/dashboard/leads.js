@@ -25,9 +25,10 @@ exports.postLeads = (req, res, next) => {
 
 
 const getDataFromDB  = (req,res,next) => {
-    mongoose.Lead.aggregate([
+ 
+   mongoose.Lead.aggregate([
 
-        {  $match: {cid: global.loginCustomer.id }},
+        {  $match: {cid: req.session.loginCustomer._id.toString() }},
         {  $lookup: {
                 from: "leadprocesses",
                 localField: "_id",
@@ -43,7 +44,7 @@ const getDataFromDB  = (req,res,next) => {
     .then(
 
         results =>  {
-        console.log(results)
+        //console.log(results)
 
         setPageData(results)
         
@@ -74,15 +75,16 @@ const setPageData = (listOfUsers) => {
 
 const renderLeadsTable = (req,res,next,newleads) => {
         console.log(1)
-        console.log('render',newleads)
+       // console.log('render',newleads)
 
         res.render('dashboard/dashboard',{
             title: "Leads",
-            customer: global.loginCustomer,
+            customer: req.session.loginCustomer,
             laneMenu: Payment.payLaneMenuForCustomer,
             content: 'My Leads',
             leads: newleads,
             pageData : paging,
+            expDate: new Date() > req.session.loginCustomer.expDate ? true : false
     
             
     

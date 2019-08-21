@@ -18,33 +18,21 @@
 
 <body>
  
- 
- <!-- Modal -->
+
 <div class="container">
     <div class="row d-flex align-items-center hero">
         <div class="col-sm">
-            <h1 class="hero-title mb-4">Login</h1>
-            <br>
+            <h1 class="hero-title mb-4"><%=title%>
 
-            <% if (typeof errMsg !== "undefined") { %>
+            <h2><%=msg%></h2>
+            <form action="/employees/newpass" method="post">
+            
+                <input placeholder="Email" type="text" name="email">
 
-                <label for=""><%=errMsg%></label>
-
-            <% } %>
-            <form action="/employees/login" method="post">
-
-                <input value="<%= loginData.email %>" placeholder="Email" type="text" name="email">
-
-                <input value="<%= loginData.password %>" placeholder="Password" type="password" name="password">
-
-            <button type="submit">Login</button>
-
-            </form>
-                <a href="/employees/newpass">Forgot Password?</a>
+            <button type="submit">Send New Password</button>
+        
         </div>
 
     </div>
 </div>
- </body>
 
-</html>
