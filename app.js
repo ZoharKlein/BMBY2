@@ -15,27 +15,6 @@ const store = new MongoDBStore({
     collection: "sessions"
 }) 
 
-
-//mail
-const nodemiler = require('nodemailer')
-const sendgridTransport = require('nodemailer-sendgrid-transport')
-
-const transporter = nodemiler.createTransport(sendgridTransport({
-    auth:{
-        api_key: "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",
-
-    }
-}))
-
-//add to places that need that
-
-// transporter.sendMail({
-    // to: "walla501@walla.com",
-    // from: "admin@bmby2.com",
-    // subject: "test",
-    // html: '<h1>sucsses</h1>'
-// }).catch(err => {console.log(err)})
-
 ///Routers
 const leadAPI = require('./routers/LeadApi/leadAPI')
 

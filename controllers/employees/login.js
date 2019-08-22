@@ -8,6 +8,8 @@ exports.getLogin = (req, res, next) => {
   if (req.session.loginUser !== undefined) {
     mysql.EnterQuery(mysql.findUserByID(req.session.loginUser.userID))
     .then(result => {
+
+          //destory cookice and create a new one ******
           console.log(1, req.session.loginUser)
           req.session.loginUser = result[0]
           console.log("result",result)

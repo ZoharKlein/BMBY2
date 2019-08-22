@@ -35,3 +35,18 @@
             <%-include("price-menu") -%>
 
     <% } %> 
+
+
+    <h2>Change Password</h2>
+    <form action="/dashboard/account" method="post">
+        
+        <h3><%=errMsg%></h3>
+        <input placeholder="Old Password" type="password" name="oldPassword" value="">
+        <br>
+        <input placeholder="New Password" type="password" name="newPassword" value="">
+        <br>
+        <input placeholder="New Password Confirmed" type="password" name="newPasswordConfirmed" value="">
+        <br>
+        <button type="submit">Change Password</button>
+
+    </form>

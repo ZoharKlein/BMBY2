@@ -2,19 +2,8 @@ const mongooseDB = require('../../db/mongoose')
 const customerValid = require('../../validationConfig/joiValidationConfig').customerValid
 const Customer = require('../../models/Customer')
 const bycriptjs = require('bcryptjs')
+const sendWelcomeMail = require('../../email/email').sendWelcomeMail
 
-
-const nodemiler = require('nodemailer')
-const sendgridTransport = require('nodemailer-sendgrid-transport')
-
-const transporter = nodemiler.createTransport(sendgridTransport({
-    auth:{
-        api_key: global.config.get('Dev.mailConfig').api
-
-    }
-}))
-
-//add to places that need that
 
 
 
@@ -60,23 +49,14 @@ exports.postSignUp = (req, res, next) => {
               newCutsomer.save()
               .then(result => {
                                 if(result === true) {
-
-                                  transporter.sendMail({
-                                    to: req.body.email,
-                                    from: "admin@bmby2.com",
-                                    subject: "Thank you for chose bmby2",
-                                    html: `<h1>Welcome to bmby2</h1>
-                                    <br>
-                                    <p>Hello ${req.body.companyName}, We are glad that you start work with our leads manger.</p>`
-                                }).catch(err => {console.log(err)})
-                                  
-                                res.render('home/login',{
-                                  title: "Login",
-                                  loginData : {
-                                    email : req.body.email,
-                                    password: req.body.password,
-                                  }
-                                })
+                                  sendWelcomeMail(req.body.email,req.body.comapnyName)                                 
+                                  res.render('home/login',{
+                                    title: "Login",
+                                    loginData : {
+                                      email : req.body.email,
+                                      password: req.body.password,
+                                    }
+                                  })
                               } else {
 
                                 res.render('home/signUp',{

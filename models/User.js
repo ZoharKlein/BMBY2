@@ -27,14 +27,16 @@ module.exports = class User {
     }
 
 }
-module.exports.userRole = {
+ 
+
+const userRole = {
     WORKER: "worker",
     ADMINISTRATOR: "administrator",
     SUPER_ADMINISTRATOR: "super administrator",
 }
 
 
-module.exports.userStats = {
+const userStats = {
     WAIT_FOR_HACK: "wait for admin hack",
     APPROVED: "approved",
     SUSPENDED: "suspended",
@@ -90,4 +92,5 @@ const workerMenuWithImg = [
 ]
 
 
-
+module.exports.userRole = userRole
+module.exports.userStats = userStats

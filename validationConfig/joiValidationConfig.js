@@ -175,15 +175,16 @@ module.exports.passwordValid = (password) => {
     password: password 
         
     }, userSchema, {abortEarly: false} ,(err, value) => {
-
+    errMsg = undefined
     if (err) {
         //console.log(err)
         errArr = err
         console.log(errArr)
-        return errArr.details[0].message
+        errMsg = errArr.details[0].message
         
         }
     }) 
+    return errMsg
         
 
 

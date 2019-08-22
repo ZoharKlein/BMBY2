@@ -97,6 +97,7 @@ exports.postSettings = (req, res, next) => {
                                         else {
                                             mysql.EnterQuery(mysql.updatePasswordByID(hash,req.session.loginUser.userID))
                                             .then(res=> {
+                                                req.session.loginUser.password = hash
                                                 errMsg.push('Update new password fine.')
                                             } )
                                             .catch(errsql => { console.log(errsql )})

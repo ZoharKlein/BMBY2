@@ -18,8 +18,9 @@ router.route('/logut')
 router.route('/payment')
 .post(paymentController.postPayment)
 
-router.route('/account').
-get(accountController.getAccount)
+router.route('/account')
+.get(accountController.getAccount)
+.post(accountController.postAccount)
 
 router.route('/leads')
 .get(leadsController.getLeads)
