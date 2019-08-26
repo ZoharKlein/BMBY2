@@ -32,14 +32,14 @@ exports.postPayment = (req, res, next) => {
       errArr = [...errArr, ...validErr]
       console.log(errArr)
 
-      req.body.id = global.loginCustomer.id
+      req.body.id = req.session.loginCustomer.id
 
       console.log(req.body)
 
       if (errArr.length > 0) {
         // render error
       } else {
-        console.log(global.loginCustomer.id)
+        console.log(req.session.loginCustomer.id)
         //1. create new payment mongodb
 
         const newPayment = new Payment(req.body)
@@ -56,14 +56,28 @@ exports.postPayment = (req, res, next) => {
         })
 
         //2. change the lane of customer
+        console.log(req.session)
+        if (req.session.loginCustomer.facebookID !== undefined) {
+
+          mongoose.FacebookCoustomer.findByIdAndUpdate(
+            mongoose.ObjectId( req.session.loginCustomer._id) , 
+            {$set: {lane: req.body.lane, expDate: new Date(nowDate.getFullYear() + parseInt( req.body.lane) ,nowDate.getMonth() , nowDate.getDate() + 1)} }
+             , ()=>{
+               req.session.loginCustomer.lane = req.body.lane
+               req.session.passport.user = req.session.loginCustomer  
+               res.redirect('/dashboard')
+             })
+
+        } else {
+
         mongoose.Customer.findByIdAndUpdate(
-          mongoose.ObjectId( global.loginCustomer.id) , 
+          mongoose.ObjectId( req.session.loginCustomer._id) , 
           {$set: {lane: req.body.lane, expDate: new Date(nowDate.getFullYear() + parseInt( req.body.lane) ,nowDate.getMonth() , nowDate.getDate() + 1)} }
            , ()=>{
-             global.loginCustomer.lane = req.body.lane
+            req.session.loginCustomer.lane = req.body.lane
              res.redirect('/dashboard')
            })
-
+          }
         //3. render the dashboard of customer
 
 
@@ -76,7 +90,7 @@ exports.postPayment = (req, res, next) => {
     
     res.render('dashboard/payment',{
       title: "BMBY2 Dashboard",
-      customer: global.loginCustomer,
+      customer: req.session.loginCustomer,
       lane: lane,
       paymentCompany: Payment.paymentCompanys
 

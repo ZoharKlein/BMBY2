@@ -8,6 +8,10 @@ const now = new Date()
 
 
 exports.getReports = (req, res, next) => {
+    if (req.session.loginUser.lastPasswordUpdate >= new Date() ) {
+        res.redirect('/employees/dashboard/settings')
+    }
+    else {
 
     let menu
 
@@ -40,7 +44,7 @@ exports.getReports = (req, res, next) => {
     
     })
     .catch(err => {console.log(err)} )
- 
+}
 
 }
 

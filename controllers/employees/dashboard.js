@@ -4,6 +4,11 @@ const User = require('../../models/User')
 
 exports.getDashboard = (req, res, next) => {
 
+    if (req.session.loginUser.lastPasswordUpdate >= new Date() ) {
+        res.redirect('/employees/dashboard/settings')
+    }
+    else {
+
     let menu
 
     if (req.session.loginUser === undefined) {
@@ -18,7 +23,7 @@ exports.getDashboard = (req, res, next) => {
         userMenu: menu,
         content: "Home"
       })
-
+    }
 }
 
 exports.getDashboardHome = (req, res, next) => {

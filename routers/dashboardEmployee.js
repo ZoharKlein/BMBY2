@@ -9,27 +9,30 @@ const leadsController = require('../controllers/employees/leads')
 const customersController = require('../controllers/employees/customers')
 const reportsController = require('../controllers/employees/reports')
 
+const isPasswordExpiredMiddleware = require('../middleware/isPasswordExpired')
+
 
 /* Dashboard */
 router.route('/')
-.get(dashboardController.getDashboard)
+.get(isPasswordExpiredMiddleware, dashboardController.getDashboard)
 
 router.route('/home')
-.get(dashboardController.getDashboardHome)
+.get(isPasswordExpiredMiddleware, dashboardController.getDashboardHome)
+
 
 router.route('/users')
-.get(usersController.getUsers)
+.get(isPasswordExpiredMiddleware, isPasswordExpiredMiddleware,usersController.getUsers)
 .post(usersController.postUsers)
 
 router.route('/leads')
-.get(leadsController.getLeads)
+.get(isPasswordExpiredMiddleware , leadsController.getLeads)
 .post(leadsController.postLeads)
 
 router.route('/customers')
-.get(customersController.getCustomers)
+.get(isPasswordExpiredMiddleware, customersController.getCustomers)
 
 router.route('/reports')
-.get(reportsController.getReports)
+.get(isPasswordExpiredMiddleware, reportsController.getReports)
 
 router.route('/settings')
 .get(settingsController.getSettings)

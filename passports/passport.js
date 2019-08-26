@@ -10,7 +10,7 @@ const mongooseDB = require('../db/mongoose')
 
 module.exports = (passport) => {
     localstart(passport)
-    googlestrat(passport)
+    //googlestrat(passport)
     facebookstart(passport)
 }
 

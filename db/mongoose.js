@@ -18,6 +18,16 @@ const customerSchema = new mongoose.Schema({
 
 exports.Customer = new mongoose.model('Coustomer', customerSchema)
 
+const facebookCustomerSchema = new mongoose.Schema({
+    companyName:{ type : String , unique : true, required : true},
+    email: { type : String , unique : true, required : true},
+    facebookID: { type : String , unique : true, required : true},
+    expDate: Date,
+    lane : String
+})
+
+exports.FacebookCoustomer = new mongoose.model('FacebookCoustomer', facebookCustomerSchema)
+
 const leadSchema = new mongoose.Schema({
     firstname: { type : String , sparse : true, required : true },
     lastname: { type : String , sparse : true, required : true},

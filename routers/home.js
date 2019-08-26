@@ -1,3 +1,8 @@
+const passport = require('passport');
+require('../passports/customerPassport')(passport);
+
+
+const mid = require('../middleware/facebook')
 /**
  * about
  * our crm
@@ -43,6 +48,18 @@ router.route('/login')
 .get(loginController.getLogin)
 .post(loginController.postLogin)
 
+// /* Facebook Login */
+// router.route('/auth/facebook')
+// .post(facebookLoginController.postFacebookLogin)
+
+router.route('/auth/facebook')
+.get(passport.authenticate('facebook',
+{ scope : ['email']} ) )
+
+router.route('/auth/facebook/callback')
+.get(passport.authenticate('facebook', { successRedirect: '/dashboard', failureRedirect: '/login' }))
+
+
 /* Forgot Password */
 router.route('/newpass')
 .get(newpassController.getNewpass)
@@ -50,12 +67,8 @@ router.route('/newpass')
 
 /* Sign Up */
 router.route('/signup')
-.get(signUpController.getSignUp)
+.get(signUpController.postSignUp)
 .post(signUpController.postSignUp)
 
-
-/* Employee Login */
-
-/* Employee Sign Up*/
 
 module.exports = router;

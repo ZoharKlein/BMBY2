@@ -31,8 +31,16 @@ const paging = {
 }
 
 exports.getCustomers = (req, res, next) => {
+
+    if (req.session.loginUser.lastPasswordUpdate >= new Date() ) {
+        res.redirect('/employees/dashboard/settings')
+    }
+    else {
+
+        getDataFromDB(req,res,next)
+    }
     
-    getDataFromDB(req,res,next)
+
 
 
 }

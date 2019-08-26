@@ -30,8 +30,11 @@ const paging = {
 
 exports.getUsers = (req, res, next) => {
 
-    renderTable(req,res,next)
 
+
+
+    renderTable(req,res,next)
+    
 }
 
 exports.postUsers = (req, res, next) => {

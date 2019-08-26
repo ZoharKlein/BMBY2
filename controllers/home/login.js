@@ -7,12 +7,6 @@ exports.getLogin = (req, res, next) => {
   let emailIn = req.body.companyName
   let passwordIn = req.body.password
 
-  
-  // if (req.session.loginData !== undefined) {
-    // emailIn = req.session.loginData.email
-    // passwordIn = req.session.loginData.password
-  // }
-
   if (req.session.loginCustomer !== undefined) {
     mongoose.Customer.findById(req.session.loginCustomer._id)
     .then(result => {
@@ -48,38 +42,49 @@ exports.getLogin = (req, res, next) => {
   }
 }
 exports.postLogin = (req, res, next) => {
-  
-  passport.authenticate('local-customer', (err, result, message) =>{
 
-
-    if (result === false) {
-
-      res.render('home/login',{
-        title: "Login",
-        loginData : {
-          email : req.body.email,
-          password: req.body.password,
-        },
-        errMsg : message.message
-      })
-
-    }
-    else {
-      req.session.loginCustomer = result
-
-      console.log("session", req.session.loginCustomer)
-      
-      res.redirect('/dashboard')
-
-
-    }
-    
-
-
+  if (req.body.loginBtn === "facebook") {
+    res.redirect('/auth/facebook')
   }
-  )(req, res, next)
+  else if (req.body.loginBtn === "login") {
+    passport.authenticate('local-customer', (err, result, message) =>{
+
+      if (result === false) {
+  
+        res.render('home/login',{
+          title: "Login",
+          loginData : {
+            email : req.body.email,
+            password: req.body.password,
+          },
+          errMsg : message.message
+        })
+  
+      }
+      else {
+        req.session.loginCustomer = result
+  
+        console.log("session", req.session.loginCustomer)
+        
+        res.redirect('/dashboard')
+  
+  
+      }
+    }
+    )(req, res, next)
+
+  } 
+  
+
 
 }
 
 
+// //facebook
+// app.get('/customers/auth/facebook', passport.authenticate('facebook') );
 
+
+// app.get('/auth/facebook/callback',
+//   passport.authenticate('facebook', { successRedirect: '/customers',
+//                                       failureRedirect: '/customers' }
+// ));

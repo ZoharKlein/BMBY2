@@ -5,18 +5,14 @@ module.exports = class Customer {
 
     constructor(...parms) {
         const data = parms[0]
-
-
-            this.customer = mongooseDB.Customer({
-                companyName: data.companyName, 
-                email: data.email,
-                password: data.password,
-                expDate: new Date(),
-                lane: 'None',
-            })
-
-
-
+        console.log(parms)
+        this.facebookCoustomer = mongooseDB.FacebookCoustomer({
+            companyName: data.companyName, 
+            facebookID: data.facebookID,
+            email:data.email,
+            expDate: new Date(),
+            lane: 'None'
+        })
         
     }
 
@@ -25,13 +21,13 @@ module.exports = class Customer {
      save() {
         let customerInDB = false
 
-                return this.customer.save()
+                return this.facebookCoustomer.save()
                 .then(saveResult => {
                     // console.log(saveResult)
                     return true
                 })
                 .catch(saveErr => { 
-                    console.log(saveErr.code)
+                    console.log(saveErr)
                     if (saveErr.code === 11000) {
                         return "You are allready sign up."
                     }

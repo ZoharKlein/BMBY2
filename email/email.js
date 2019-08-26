@@ -34,3 +34,5 @@ module.exports.sendWelcomeMail = (email,companyName) => {
         <p>Hello ${companyName}, We are glad that you start work with our leads manger.</p>`
     }).catch(err => {console.log(err)})
 }
+
+

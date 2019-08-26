@@ -7,11 +7,17 @@ const bcryptjs = require('bcryptjs')
 
 
 exports.getSettings = (req, res, next) => {
+    let errMsg = ['']
+
+    if (req.session.loginUser.lastPasswordUpdate >= new Date() ) {
+        errMsg = ['your password are expired. please renew it.']
+    }
 
     res.render('employees/dashboard',{
         user : req.session.loginUser,
         userMenu: User.selectMenuByRole(req.session.loginUser.role),
-        content: "Settings"
+        content: "Settings",
+        updateErr: errMsg
       })
 
 }

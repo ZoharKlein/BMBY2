@@ -3,7 +3,10 @@ const Payment = require('../../models/Payment')
  
 exports.getDashboard = (req, res, next) => {
 
-  
+  console.log(req.session)
+  if (req.session.passport.user.facebookID !== undefined) {
+    req.session.loginCustomer = req.session.passport.user 
+  }
   //console.log("session", req.session.loginCustomer)
       res.render('dashboard/dashboard',{
         title: "BMBY2 Dashboard",
@@ -12,7 +15,6 @@ exports.getDashboard = (req, res, next) => {
         content: "Home",
         expDate: new Date() > req.session.loginCustomer.expDate ? true : false
         
-
       })
   
       ///mabye add more stuff to send to the ejs
