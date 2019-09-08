@@ -46,13 +46,13 @@ var chart = am4core.create("chartdiv", am4charts.XYChart);
 
 // Add data
 
-stats.leadPerUser.forEach(element => chart.data.push({"user":element.userID,"leads": element.leads}) )
+stats.leadPerUser.forEach(element => chart.data.push({"user":element.username,"leads": element.leads}) )
 
 
 
 for (i=0; i< stats.leadPerUser ;i++) {
   console.log(stats.leadPerUser[i])
-  chart.data.push({"user":stats.leadPerUser[i].userID,"leads": stats.leadPerUser[i].leads})
+  chart.data.push({"user":stats.leadPerUser[i].username,"leads": stats.leadPerUser[i].leads})
 }
 
 console.log(chart.data)
@@ -67,7 +67,7 @@ categoryAxis.renderer.minGridDistance = 5;
 
 categoryAxis.renderer.labels.template.adapter.add("dy", function(dy, target) {
   if (target.dataItem && target.dataItem.index & 2 == 2) {
-    return dy + 1;
+    return dy + 21;
   }
   return dy;
 });

@@ -41,6 +41,8 @@ exports.findUserByMailAndPassword = (email,password) => {return `SELECT * FROM u
 exports.findUsersByRole = (role) => {return `SELECT * FROM users WHERE role='${role}'`}
 exports.findUsersByStatus = (status) => {return `SELECT * FROM users  WHERE status ='${status}'`}
 
+exports.findListOfFirstnameLastnameByID = (idArr) => {return `SELECT userID , firstName,lastName FROM users where userID in (${idArr})`}
+
 //insert
 exports.insertNewUser = (...user) => {
     console.log('user:', user)

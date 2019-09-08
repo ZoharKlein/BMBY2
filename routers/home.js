@@ -67,7 +67,7 @@ router.route('/newpass')
 
 /* Sign Up */
 router.route('/signup')
-.get(signUpController.postSignUp)
+.get(signUpController.getSignUp)
 .post(signUpController.postSignUp)
 
 

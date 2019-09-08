@@ -49,7 +49,9 @@ exports.postSignUp = (req, res, next) => {
               newCutsomer.save()
               .then(result => {
                                 if(result === true) {
-                                  sendWelcomeMail(req.body.email,req.body.comapnyName)                                 
+                                  
+                                  //cid neet to send in the mail
+                                  sendWelcomeMail(req.body.email,req.body.comapnyName,newCutsomer.customer._id)      
                                   res.render('home/login',{
                                     title: "Login",
                                     loginData : {

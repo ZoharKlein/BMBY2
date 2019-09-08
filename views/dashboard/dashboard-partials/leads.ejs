@@ -40,9 +40,9 @@
                 <td>
 
                 <% if (i % 2 === 0) { %>
-                     <button onClick="showModal(<%= JSON.stringify(leads) %>,<%=i%>)" class="btn-double" type="">Watch</button>
+                  <button onClick="showModal(<%= JSON.stringify(leads) %>,<%=i%>)" class="btn-double" type="">Processes</button>
                 <% } else { %>
-                 <button onClick="showModal(<%= JSON.stringify(leads) %>,<%=i%>)" class="btn-odd" type="">Watch</button>
+                    <button onClick="showModal(<%= JSON.stringify(leads) %>,<%=i%>)" class="btn-double" type="">Processes</button>
             <% } %>
             </td>
                 
@@ -81,12 +81,17 @@
   <div class="modal-content">
     <span class="close">&times;</span>
 
-
         <h1 id="modal-fullname"></h1>
-
+        <h2 id="modal-title"></h2>
         
-      
+        <input type="hidden" id="userID" name="userID" value="">
+        <input type="hidden" id="leadID" name="leadID" value="">
+        
+        <div id="modal-leads-processes">
+            
+        </div>
 
+        <br>
 
 
   </div>
@@ -122,13 +127,56 @@ window.onclick = function(event) {
   }
 }
 
-    function showModal(user,index) {
+    function showModal(leads,index) {
 
         modal.style.display = "block";
         
 
-  //      document.getElementById("modal-fullname").innerHTML = user[index].firstName + " " + user[index].lastName
-    //    document.getElementById("userID").value = user[index].userID
+
+
+
+        document.getElementById("modal-fullname").innerHTML = leads[index].firstname + " " + leads[index].lastname
+        document.getElementById("modal-title").innerHTML = leads[index].title
+
+        let html = ""
+
+        leads[index].thisleadprocesses.forEach(element => {
+            console.log(element)
+            
+            const date = new Date(element.last_date_modified)
+
+            console.log(date.getDate())
+
+            html+= `
+            <div>
+            <hr>
+                <table>
+
+                    <tr>
+                    <td> Status :</td> <td> ${element.status}</td>
+                    </tr>
+                    <tr>
+                    <td> Date :</td> <td> ${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}</td>
+                    </tr>
+                    <tr>
+                    <td> Info :</td> <td> ${element.msg}</td>
+                    </tr>
+
+                </table>
+
+            </div>
+            `
+
+        })
+
+        document.getElementById("modal-leads-processes").innerHTML = html
+
+        document.getElementById("userID").value = leads[index].userID
+        document.getElementById("leadID").value = leads[index]._id
+
+
+        console.log(leads[index]._id,leads[index].userID)
+
 
     }
 

@@ -14,12 +14,8 @@ module.exports = class Customer {
                 expDate: new Date(),
                 lane: 'None',
             })
-
-
-
         
     }
-
 
 
      save() {

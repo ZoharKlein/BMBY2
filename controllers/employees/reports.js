@@ -21,8 +21,12 @@ exports.getReports = (req, res, next) => {
         menu = User.selectMenuByRole(req.session.loginUser.role)
     }
     
-    const a = `${now.getFullYear()}-${now.getMonth() + 1}-01`
-    const b = `${now.getFullYear()}-${now.getMonth() + 2}-01`
+    //const a = `${now.getFullYear()}-${now.getMonth() + 1}-01`
+    //const b = `${now.getFullYear()}-${now.getMonth() + 2}-01`
+
+    const a = '2019-7-01'
+    const b = '2019-10-01'
+
 
     console.log(a,b)
 
@@ -34,13 +38,47 @@ exports.getReports = (req, res, next) => {
 
         stats = statistics(result)
         console.log(stats)
+
+        const userids = stats.leadPerUser.map(element => {
+            return element.userID
+        }).join(', ')
+
+        console.log(userids)
+        
+        mysql.EnterQuery(mysql.findListOfFirstnameLastnameByID(userids))
+        .then(users => {
+            
+            stats.leadPerUser.forEach(element => {
+                const username = users.find(user => {
+                    if (element.userID === user.userID){
+                        return `${user.firstName} ${user.lastName}`
+                    }
+                })
+                element.username = `${username.firstName} ${username.lastName}`
+            })
+            
+            res.render('employees/dashboard',{
+                user : req.session.loginUser,
+                userMenu: menu,
+                content: "Reports",
+                stats: stats
+              })
+
+            console.log(users)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
+
+
     
-        res.render('employees/dashboard',{
-            user : req.session.loginUser,
-            userMenu: menu,
-            content: "Reports",
-            stats: stats
-          })
+        // res.render('employees/dashboard',{
+        //     user : req.session.loginUser,
+        //     userMenu: menu,
+        //     content: "Reports",
+        //     stats: stats
+        //   })
     
     })
     .catch(err => {console.log(err)} )
@@ -113,3 +151,24 @@ const statistics = (list) => {
 
 
 }
+
+
+// mysql.EnterQuery(mysql.findListOfFirstnameLastnameByID(userids))
+// .then(users => {
+    
+
+
+//     leadUserIDarr.forEach(element => {
+//         const username = users.find(user => {
+//             if (element.userID === user.userID){
+//                 return `${user.firstName} ${user.lastName}`
+//             }
+//         })
+//         element.username = `${username.firstName} ${username.lastName}`
+//     })
+
+//     console.log(users,leadUserIDarr)
+// })
+// .catch(err => {
+//     console.log(err)
+// })
