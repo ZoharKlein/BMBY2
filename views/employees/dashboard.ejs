@@ -93,6 +93,12 @@
           <img src="<%=user.profileImg%>" class="cur-user__pic" alt="user pic" id="cur-user-pic">
           <h5 class="cur-user__name" id="cur-user-name"><%=user.firstName %> <%=user.lastName %></h5>
           <p class="cur-user__role" id="cur-user-role"><%=user.role%></p>
+          
+            <form action="/employees/dashboard/logout" method="POST">
+            
+              <button type="submit">Logout</button>
+            
+            </form>
         </div>
 
         <% for(i = 0; i < userMenu.length; i++) { %> 

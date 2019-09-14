@@ -1,11 +1,11 @@
 const mysql = require('../../db/mysql')
 const bcryptjs = require('bcryptjs')
+const passport = require('passport');
+require('../../passports/employeePassport')(passport);
 
 exports.getLogin = (req, res, next) => {
 
-  
-
-  if (req.session.loginUser !== undefined) {
+  if (req.session.loginUser !== undefined && req.session.loginUser !== null) {
     mysql.EnterQuery(mysql.findUserByID(req.session.loginUser.userID))
     .then(result => {
 
@@ -38,55 +38,33 @@ exports.getLogin = (req, res, next) => {
 }
   exports.postLogin = (req, res, next) => {
 
-    //change to passport after i finsh
+    //passpost
 
-    mysql.EnterQuery(mysql.findUserByMail(req.body.email))
-    .then(user => { 
-      console.log(user)
-      if (user.length > 0 ) {
-        
-        bcryptjs.compare(req.body.password, user[0].password, (err, isMatch) => {
-          if (err) {
+    passport.authenticate('local-employee', (err, result, message) =>{
 
-          } else {
-            if (isMatch) {
-              console.log('ok')
-              req.session.loginUser = user[0]
-              console.log(req.session.loginUser)
-
-              res.redirect('/employees/dashboard')
-            }
-            
-            else {
-              res.render('employees/login',{
-                title: "Login",
-                errMsg: "Wrong Password!",
-                loginData : {
-                  email : req.body.email,
-                  password: "",
-                }
-              })
-            }
-          }
-      }) 
-
-      }
-      
-      else {
+      if (result === false) {
+  
         res.render('employees/login',{
           title: "Login",
-          errMsg: "Wrong Email!",
           loginData : {
-            email : "",
-            password: "",
-          }
+            email : req.body.email,
+            password: req.body.password,
+          },
+          errMsg : message.message
         })
+  
       }
-      
-    })
-    .catch(mysqlErr => {console.log(mysqlErr) })
-
-
+      else {
+        req.session.loginUser = result
+  
+        console.log("session", req.session.loginUser)
+        
+        res.redirect('/employees/dashboard')
+  
+  
+      }
+    }
+    )(req, res, next)
 
   }
 

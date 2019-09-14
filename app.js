@@ -100,40 +100,5 @@ app.use(errorController.get404);
 
 
 
-// /**
-//  * 
-//  * need to do the facebook and goole login on rouutes
-//  * need to think what next page will be
-//  * 
-//  */
-
-
-
-// //google
-// app.get('/customers/auth/google',
-//   passport.authenticate('google', { scope: ['profile'] }));
-
-  
-//   app.get('/auth/google/callback', 
-//   passport.authenticate('google', { failureRedirect: '/customers' }),
-//   function(req, res) {
-//     res.redirect('/customers');
-//   });
-
-
-
-
-
-
-
-
 app.listen(PORT, () => console.log(PORT + " running"))
 
-///*facebook
-/*
-app.get('/customers/auth/facebook', passport.authenticate('facebook') );
-
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { successRedirect: '/customers',
-                                      failureRedirect: '/login' }));
-*/

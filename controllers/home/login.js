@@ -47,6 +47,7 @@ exports.postLogin = (req, res, next) => {
     res.redirect('/auth/facebook')
   }
   else if (req.body.loginBtn === "login") {
+    
     passport.authenticate('local-customer', (err, result, message) =>{
 
       if (result === false) {
@@ -78,13 +79,3 @@ exports.postLogin = (req, res, next) => {
 
 
 }
-
-
-// //facebook
-// app.get('/customers/auth/facebook', passport.authenticate('facebook') );
-
-
-// app.get('/auth/facebook/callback',
-//   passport.authenticate('facebook', { successRedirect: '/customers',
-//                                       failureRedirect: '/customers' }
-// ));
